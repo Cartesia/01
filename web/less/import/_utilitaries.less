@@ -1,0 +1,211 @@
+/******************************************************
+* TEXT-ALIGN
+*******************************************************/
+.text-center {
+	text-align: center !important;
+}
+
+.text-right {
+	text-align: right !important;
+}
+
+.text-left {
+	text-align: left !important;
+}
+
+.justify {
+	text-align: justify !important;
+}
+
+/******************************************************
+* END TEXT-ALIGN
+*******************************************************/
+
+/******************************************************
+* COLOR
+*******************************************************/
+
+.pitch-black {
+	color: @pitch-black;
+}
+.black {
+	color: @black;
+}
+.white {
+	color: @white;
+}
+.main-color {
+	color: @main;
+}
+.secondary-color {
+	color: @secondary;
+}
+.text-color {
+	color: @text-color;
+}
+
+/******************************************************
+* END COLOR
+*******************************************************/
+
+/******************************************************
+* BACKGROUND COLOR
+*******************************************************/
+
+.bg-pitch-black {
+	color: @pitch-black;
+}
+.bg-black {
+	color: @black;
+}
+.bg-white {
+	color: @white;
+}
+.bg-main {
+	color: @main;
+}
+.bg-secondary {
+	color: @secondary;
+}
+
+/******************************************************
+* END BACKGROUND COLOR
+*******************************************************/
+
+/******************************************************
+* DISPLAY
+*******************************************************/
+
+.none {
+	display: none !important;
+}
+
+.block {
+	display: block !important;
+}
+
+.inline-block {
+	display: inline-block !important;
+}
+
+/******************************************************
+* END DISPLAY
+*******************************************************/
+
+/******************************************************
+* FONT
+*******************************************************/
+
+.light {
+	font-weight: 300;
+}
+
+.normal {
+	font-weight: 400;
+}
+
+.medium {
+	font-weight: 500;
+}
+
+.bold {
+	font-weight: 700;
+}
+
+.ultra-bold {
+	font-weight: 900;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+.small-caps {
+	font-variant: small-caps;
+}
+
+/******************************************************
+* END FONT
+*******************************************************/
+
+/******************************************************
+* OTHER
+*******************************************************/
+
+.both {
+	clear: both;
+}
+
+.absolute {
+	position: absolute;
+}
+
+.relative {
+	position: relative;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.va-top
+{
+	vertical-align: top !important;
+}
+
+.va-middle
+{
+	vertical-align: middle !important;
+}
+
+.va-bottom
+{
+	vertical-align: bottom !important;
+}
+
+.va-sub
+{
+  vertical-align: sub !important;
+}
+
+/******************************************************
+* END OTHER
+*******************************************************/
+
+/******************************************************
+* FUNCTION
+*******************************************************/
+
+/*.margin-top(@margin-bottom) {
+	margin-top: @margin-bottom * 1.5;
+}*/
+
+.grid-margin(@font-size: @base-font-size, @line-height: @base-line-height, @margin-top: false) {
+	@margin-bottom: @font-size * @line-height / 2;
+	margin-bottom: @font-size * @line-height / 2;
+
+	.margin-top(@margin-bottom, @line-height) when (@margin-top = true) {
+		margin-top: @margin-bottom * @line-height;
+	}
+	.margin-top(@margin-bottom, @line-height);
+}
+
+.rounded(@radius: @rounded-value)
+{
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	border-radius: @radius;
+}
+
+.transition(@property:all, @duration:@duration, @ease:linear) {
+  -webkit-transition: @property @duration @ease;
+  transition: @property @duration @ease;
+}
+/******************************************************
+* END FUNCTION
+*******************************************************/
+
