@@ -7,24 +7,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class DefaultController extends Controller
+class EditorController extends Controller
 {
 
     public function indexAction(Request $request)
     {
+
         $em = $this->getDoctrine()->getEntityManager();
 
         $slug = $request->get('slug_brand');
 
-        if (!$slug) {
+        if(!$slug){
             $brand = $em->getRepository('AppBundle:Brand')->getFirstBrand();
-            if (!$brand) {
+            if(!$brand){
                 throw new NotFoundHttpException("404");
             }
-            return $this->redirectToRoute('show_template', ['slug_brand' => $brand->getSlug()], 301);
-        } else {
+
+            return $this->redirectToRoute('editor_template', ['slug_brand' => $brand->getSlug()], 301);
+        }else{
             $brand = $em->getRepository('AppBundle:Brand')->findOneBySlug($slug);
-            if (!$brand) {
+            if(!$brand){
                 throw new NotFoundHttpException("404");
             }
         }
@@ -34,14 +36,15 @@ class DefaultController extends Controller
 
         $arrayTemplates = [];
 
-        foreach ($templates as $template) {
+        foreach($templates as $template){
             $listBlocs = $em->getRepository('AppBundle:Bloc')->getBlocsByTemplate($template);
-            $arrayTemplates[$template->getId()]['template'] = $template;
-            $arrayTemplates[$template->getId()]['blocs'] = $listBlocs;
+            $arrayTemplates[$template->getId()]['template'] = $template ;
+            $arrayTemplates[$template->getId()]['blocs'] = $listBlocs ;
         }
 
+
         // replace this example code with whatever you need
-        return $this->render('AppBundle:Default:index.html.twig', array(
+        return $this->render('AppBundle:Editor:index.html.twig', array(
             'arrayTemplates' => $arrayTemplates,
         ));
     }

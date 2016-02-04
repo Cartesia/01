@@ -15,7 +15,6 @@ class BlocRepository extends EntityRepository
     public function getBlocsByTemplate($template)
     {
         return $this->createQueryBuilder('b')
-            ->select('b')
             ->leftJoin('b.templates', 't')
             ->where('t = :template')
             ->setParameter('template', $template)

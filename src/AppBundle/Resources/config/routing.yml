@@ -1,3 +1,8 @@
 documentation:
     resource: "documentation/routing.yml"
     prefix: /documentation
+
+editor:
+    resource: "editor/routing.yml"
+    prefix: /
+

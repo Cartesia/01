@@ -13,9 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class BlocController extends Controller
 {
-    /**
-     * @Route("/", name="homepage")
-     */
+
     public function indexAction(Request $request)
     {
         $blocs = $this->getDoctrine()->getManager()->getRepository('AppBundle:Events')->findAll();

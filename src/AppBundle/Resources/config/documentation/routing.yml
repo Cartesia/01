@@ -1,5 +1,6 @@
 show_template:
     path: "/{slug_brand}/"
+    path: "/{slug_brand}"
     defaults: {_controller: AppBundle:Default:index }
 
 default_template:
