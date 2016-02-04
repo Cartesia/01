@@ -17,11 +17,8 @@ class BrandRepository extends EntityRepository
         return $this->createQueryBuilder('b')
             ->orderBy('b.id', 'ASC')
             ->setMaxResults(1)
-<<<<<<< HEAD
             ->getQuery()->getOneOrNullResult()
-=======
             ->getQuery()->getResult()
->>>>>>> origin
             ;
     }
 }
