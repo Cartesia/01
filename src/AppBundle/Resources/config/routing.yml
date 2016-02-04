@@ -1,7 +1,3 @@
-show_template:
-    path: "/documentation/{slug_brand}"
-    defaults: {_controller: AppBundle:Default:index }
-
 documentation:
     resource: "documentation/routing.yml"
     prefix: /documentation

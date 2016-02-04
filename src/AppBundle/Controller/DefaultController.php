@@ -17,14 +17,18 @@ class DefaultController extends Controller
         $slug = $request->get('slug_brand');
 
         if(!$slug){
-            $brand = $em->getRepository('AppBundle:Brand')->find();
+            $brand = $em->getRepository('AppBundle:Brand')->getFirstBrand();
+            if(!$brand){
+                throw new NotFoundHttpException("404");
+            }
+            return $this->redirectToRoute('show_template', ['slug_brand' => $brand[0]->getSlug()], 301);
+        }else{
+            $brand = $em->getRepository('AppBundle:Brand')->findOneBySlug($slug);
+            if(!$brand){
+                throw new NotFoundHttpException("404");
+            }
         }
 
-        $brand = $em->getRepository('AppBundle:Brand')->findOneBySlug($slug);
-
-        if(!$brand){
-            throw new NotFoundHttpException("404");
-        }
 
         $templates = $em->getRepository('AppBundle:Template')->getTemplatesByBrand($brand);
 

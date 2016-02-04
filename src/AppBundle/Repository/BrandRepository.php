@@ -12,13 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class BrandRepository extends EntityRepository
 {
-    public function getFirstBrand($brand)
+    public function getFirstBrand()
     {
         return $this->createQueryBuilder('b')
-            ->select('b')
-            ->leftJoin('t.brands', 'tb')
-            ->where('tb = :brand')
-            ->setParameter('brand', $brand)
+            ->orderBy('b.id', 'ASC')
+            ->setMaxResults(1)
             ->getQuery()->getResult()
             ;
     }
