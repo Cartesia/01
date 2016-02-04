@@ -1,0 +1,51 @@
+/******************************************************
+*
+* STYLES
+*
+* Set differents mixins for styles
+* Table of content:
+* 01 - MAIN INITIALISATION
+* 02 - QUERIES
+* 03 - IE FIXE
+* 04 - PRINT SETTINGS
+*
+* TODO:
+* ! IMPORTANT => adapt all ~"@{var}" to @{var}
+* in order to be less 1.4 compatible
+*******************************************************/
+
+/******************************************************
+* 01 - MAIN INITIALISATION
+*******************************************************/
+
+//import normalize.css
+@import "import/_reset";
+
+
+//import basic initialisation files
+//(var, mixins, type settings and grid helper function)
+@import "import/_variables";
+@import "import/_utilitaries";
+@import "import/_typo";
+
+/******************************************************
+* 02 - QUERIES
+*******************************************************/
+//base style
+@import "_base";
+
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+	@import "import/_768";
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+	@import "import/_992";
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+	@import "import/_1200";
+}

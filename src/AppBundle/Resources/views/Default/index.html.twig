@@ -1,0 +1,85 @@
+{% extends '@App/_layout.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9" role="main">
+                {% for t in arrayTemplates %}
+                    {% for bloc in t.blocs %}
+                        {% if bloc.id != 5 %}
+                            <div id="{{ t.template.href }}">
+                                <h2>{{ t.template.title }}</h2>
+                                <p>{{ t.template.subtitle }}</p>
+                                <div class="n-example">
+                                    <p> Exemple </p>
+                                    <table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #ffffff !important; font-family: Arial, Helvetica, Geneva, sans-serif;">
+                                        <tbody>
+                                        <tr>
+                                            <td align="center">
+                                                {{ bloc.content|raw }}
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <figure class="highlight">
+                                    <pre class="line-numbers"><code class="language-html" data-lang="html">{{ bloc.content }}</code></pre>
+                                </figure>
+                            </div>
+                        {% else %}
+                            <div id="{{ t.template.href }}" class="nav-events">
+                                <h2>{{ t.template.title }}</h2>
+                                <p>{{ t.template.subtitle }}</p>
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    {% for key, alternative in bloc.alternatives %}
+                                        {% set classe = (key == 0) ? 'class="active"' : '' %}
+                                        <li role="presentation" {{ classe }}><a href="#alternative-{{ alternative.id }}" aria-controls="alternative-{{ alternative.id }}" role="tab" data-toggle="tab" aria-expanded="true">{{ alternative.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                {% for key, alternative in bloc.alternatives %}
+                                    {% set classe = (key == 0) ? ' active' : '' %}
+                                    <div role="tabpanel" class="tab-pane{{ classe }}" id="alternative-{{ alternative.id }}">
+                                        <div class="n-example">
+                                            <p> Exemple </p>
+                                            <table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #ffffff !important; font-family: Arial, Helvetica, Geneva, sans-serif;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td align="center">
+                                                            {{ alternative.content|raw }}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <figure class="highlight">
+                                            <pre class="line-numbers"><code class="language-html" data-lang="html">{{ alternative.content}}</code></pre>
+                                        </figure>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </div>
+
+
+            <div class="col-md-3" role="navigation" >
+                <nav class="nav affix-top" id="navbar-right">
+                    {% for template in arrayTemplates %}
+                    <ul class="nav nav-pills nav-stacked" role="tablist">
+                        <li>
+                            <a href="#{{ template.template.href }}">{{ template.template.title }}</a>
+                        </li>
+                    </ul>
+                    {% endfor %}
+                    <a class="back-to-top" href="#top"> Back to top </a>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,121 @@
+/*
+ *
+ * Custom fonts
+ *
+ */
+
+/*
+ *
+ * Base
+ *
+ */
+body {
+  font: 100%/@base-line-height @base-font-family;
+  background-color: @white;
+  color: @text-color;
+  font-weight: @base-font-weight;
+  text-rendering: optimizeLegibility;
+  position: relative;
+}
+
+body, input, button {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Style for all headings
+.headings {
+  font-family: @heading-font;
+  line-height: @heading-line-height;
+}
+
+h1, .h1 {
+  @h-fs: 2.813rem;
+  font-size: @h-fs;
+  &:extend(.headings);
+  .grid-margin(@h-fs, @heading-line-height, true);
+}
+h2, .h2 {
+  @h-fs: 2.25rem;
+  font-size: @h-fs;
+  &:extend(.headings);
+  .grid-margin(@h-fs, @heading-line-height, true);
+}
+h3, .h3 {
+  @h-fs: 1.5rem;
+  font-size: @h-fs;
+  &:extend(.headings);
+  .grid-margin(@h-fs, @heading-line-height, true);
+}
+h4, .h4 {
+  @h-fs: 1.25rem;
+  font-size: @h-fs;
+  &:extend(.headings);
+  .grid-margin(@h-fs, @heading-line-height, true);
+}
+h5, .h5 {
+  @h-fs: 1rem;
+  font-size: @h-fs;
+  &:extend(.headings);
+  .grid-margin(@h-fs, @heading-line-height, true);
+}
+h6, .h6 {
+  @h-fs: 0.833rem;
+  font-size: @h-fs;
+  &:extend(.headings);
+  .grid-margin(@h-fs, @heading-line-height, true);
+}
+
+p {
+  font-variant-ligatures: common-ligatures;
+  // Césure
+  word-break: break-all;
+  word-break: break-word; // Non standard
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  // Start custome styles
+  .grid-margin();
+
+  &:last-child {
+    &:extend(.last-element);
+  }
+}
+
+
+q, blockquote {
+  padding: 1rem;
+  background-color: @black;
+  color: @white;
+
+  &:last-child {
+    &:extend(.last-element);
+  }
+}
+
+hr {
+  display: block;
+  width: 100%;
+  height: .02rem;
+  min-height: 1px;
+  border: none;
+  margin: 2rem 0;
+  clear: both;
+  background: @white;
+  outline: none;
+}
+
+.last-element {
+  margin-bottom: 0;
+}
+
+// User input typographic content
+.content {
+
+}
+/*
+ *
+ * Specific styles
+ *
+ */
