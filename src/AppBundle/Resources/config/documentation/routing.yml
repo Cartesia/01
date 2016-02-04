@@ -1,0 +1,3 @@
+show_template:
+    path: "/{slug_brand}"
+    defaults: {_controller: AppBundle:Default:index }

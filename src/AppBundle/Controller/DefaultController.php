@@ -16,13 +16,18 @@ class DefaultController extends Controller
 
         $slug = $request->get('slug_brand');
 
+        if(!$slug){
+            $brand = $em->getRepository('AppBundle:Brand')->find();
+        }
+
         $brand = $em->getRepository('AppBundle:Brand')->findOneBySlug($slug);
 
         if(!$brand){
-            throw new NotFoundHttpException("existe pas");
+            throw new NotFoundHttpException("404");
         }
 
         $templates = $em->getRepository('AppBundle:Template')->getTemplatesByBrand($brand);
+
         $arrayTemplates = [];
 
         foreach($templates as $template){
@@ -30,6 +35,7 @@ class DefaultController extends Controller
             $arrayTemplates[$template->getId()]['template'] = $template ;
             $arrayTemplates[$template->getId()]['blocs'] = $listBlocs ;
         }
+
 
         // replace this example code with whatever you need
         return $this->render('AppBundle:Default:index.html.twig', array(

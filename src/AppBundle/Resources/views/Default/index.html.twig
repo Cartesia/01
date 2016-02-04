@@ -4,38 +4,34 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9" role="main">
-                {% for template in arrayTemplates %}
-                    {% for bloc in template.blocs %}
-
-                        {% if bloc.alternatives|length > 0%}
-                            {% if bloc.alternatives|length == 1 %}
-                                <div id="{{ template.template.href }}">
-                                    <h2>{{ template.template.title }}</h2>
-                                    <p>{{ template.template.subtitle }}</p>
-                                    <div class="n-example">
-                                        <p> Exemple </p>
-                                        <table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #ffffff !important; font-family: Arial, Helvetica, Geneva, sans-serif;">
-                                            <tbody>
-                                            <tr>
-                                                <td align="center">
-                                                    {{ bloc.content|raw }}
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <figure class="highlight">
-                                        <pre class="line-numbers"><code class="language-html" data-lang="html">{{ bloc.content }}</code></pre>
-                                    </figure>
-                                </div>
-                            {% else %}
-                                <div id="{{ template.template.href }}" class="nav-events">
-                                    <h2>{{ template.template.title }}</h2>
-                                    <p>{{ template.template.subtitle }}</p>
+                {% for t in arrayTemplates %}
+                    {% for bloc in t.blocs %}
+                        <div id="{{ t.template.href }}">
+                            <h2>{{ t.template.title }}</h2>
+                            <p>{{ t.template.subtitle }}</p>
+                            <div class="n-example">
+                                <p> Exemple </p>
+                                <table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #ffffff !important; font-family: Arial, Helvetica, Geneva, sans-serif;">
+                                    <tbody>
+                                    <tr>
+                                        <td align="center">
+                                            {{ bloc.content|raw }}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <figure class="highlight">
+                                <pre class="line-numbers"><code class="language-html" data-lang="html">{{ bloc.content }}</code></pre>
+                            </figure>
+                        </div>
+                        {% if bloc.alternatives %}
+                                <div id="{{ t.template.href }}" class="nav-events">
+                                    <h2>{{ t.template.title }}</h2>
+                                    <p>{{ t.template.subtitle }}</p>
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs" role="tablist">
                                         {% for key, alternative in bloc.alternatives %}
-
                                             {% set classe = (key == 0) ? 'class="active"' : '' %}
                                             <li role="presentation" {{ classe }}><a href="#alternative-{{ alternative.id }}" aria-controls="alternative-{{ alternative.id }}" role="tab" data-toggle="tab" aria-expanded="true">{{ alternative.title }}</a></li>
                                         {% endfor %}
@@ -66,8 +62,6 @@
                                     {% endfor %}
                                 </div>
                             {% endif %}
-                        {% endif %}
-
                     {% endfor %}
                 {% endfor %}
             </div>

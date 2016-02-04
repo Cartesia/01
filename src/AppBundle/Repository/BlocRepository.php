@@ -19,7 +19,9 @@ class BlocRepository extends EntityRepository
             ->leftJoin('b.templates', 't')
             ->where('t = :template')
             ->setParameter('template', $template)
-            ->getQuery()->getResult();
+            ->getQuery()->getResult()
         ;
+
+
     }
 }

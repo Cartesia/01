@@ -19,7 +19,7 @@ class TemplateRepository extends EntityRepository
             ->leftJoin('t.brands', 'tb')
             ->where('tb = :brand')
             ->setParameter('brand', $brand)
-            ->getQuery()->getResult();
-        ;
+            ->getQuery()->getResult()
+            ;
     }
 }
