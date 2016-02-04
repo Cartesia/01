@@ -1,128 +1,91 @@
 {% extends '@App/_layout.html.twig' %}
 
 {% block body %}
-    <nav class="navbar navbar-default" id="#top">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">NewsLetter</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Mes études<span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Link</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Link</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-
     <div class="container">
         <div class="row">
             <div class="col-md-9" role="main">
-                {% for event in events %}
-                    {% if not event.alternative %}
-                        <div id="{{ event.href }}">
-                            <h2>{{ event.title }}</h2>
-                            <p>{{ event.subtitle }}</p>
-                            <div class="n-example">
-                                <p> Exemple </p>
-                                <table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #ffffff !important; font-family: Arial, Helvetica, Geneva, sans-serif;">
-                                    <tbody>
-                                        <tr>
-                                            <td align="center">
-                                                {{ event.content|raw }}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <figure class="highlight">
-                                <pre class="line-numbers"><code class="language-html" data-lang="html">{{ event.content}}</code></pre>
-                            </figure>
-                        </div>
-                    {% else %}
-                        <div id="{{ event.href }}" class="nav-events">
-                            <h2>{{ event.title }}</h2>
-                            <p>{{ event.subtitle }}</p>
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                {% for key, alternative in alternatives %}
+                {% for template in arrayTemplates %}
+                    {% for bloc in template.blocs %}
 
-                                    {% set classe = (key == 0) ? 'class="active"' : '' %}
-                                    <li role="presentation" {{ classe }}><a href="#alternative-{{ alternative.id }}" aria-controls="alternative-{{ alternative.id }}" role="tab" data-toggle="tab" aria-expanded="true">{{ alternative.title }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            {% for key, alternative in alternatives %}
-                                {% set classe = (key == 0) ? ' active' : '' %}
-                                <div role="tabpanel" class="tab-pane{{ classe }}" id="alternative-{{ alternative.id }}">
-
+                        {% if bloc.alternatives|length > 0%}
+                            {% if bloc.alternatives|length == 1 %}
+                                <div id="{{ template.template.href }}">
+                                    <h2>{{ template.template.title }}</h2>
+                                    <p>{{ template.template.subtitle }}</p>
                                     <div class="n-example">
                                         <p> Exemple </p>
                                         <table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #ffffff !important; font-family: Arial, Helvetica, Geneva, sans-serif;">
                                             <tbody>
                                             <tr>
                                                 <td align="center">
-                                                    {{ alternative.content|raw }}
+                                                    {{ bloc.content|raw }}
                                                 </td>
                                             </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                     <figure class="highlight">
-                                        <pre class="line-numbers"><code class="language-html" data-lang="html">{{ alternative.content}}</code></pre>
+                                        <pre class="line-numbers"><code class="language-html" data-lang="html">{{ bloc.content }}</code></pre>
                                     </figure>
                                 </div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
+                            {% else %}
+                                <div id="{{ template.template.href }}" class="nav-events">
+                                    <h2>{{ template.template.title }}</h2>
+                                    <p>{{ template.template.subtitle }}</p>
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        {% for key, alternative in bloc.alternatives %}
+
+                                            {% set classe = (key == 0) ? 'class="active"' : '' %}
+                                            <li role="presentation" {{ classe }}><a href="#alternative-{{ alternative.id }}" aria-controls="alternative-{{ alternative.id }}" role="tab" data-toggle="tab" aria-expanded="true">{{ alternative.title }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    {% for key, alternative in bloc.alternatives %}
+                                        {% set classe = (key == 0) ? ' active' : '' %}
+                                        <div role="tabpanel" class="tab-pane{{ classe }}" id="alternative-{{ alternative.id }}">
+
+                                            <div class="n-example">
+                                                <p> Exemple </p>
+                                                <table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #ffffff !important; font-family: Arial, Helvetica, Geneva, sans-serif;">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td align="center">
+                                                            {{ alternative.content|raw }}
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <figure class="highlight">
+                                                <pre class="line-numbers"><code class="language-html" data-lang="html">{{ alternative.content}}</code></pre>
+                                            </figure>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        {% endif %}
+
+                    {% endfor %}
                 {% endfor %}
             </div>
 
-            <div class="col-md-3" role="navigation"  id="navbar-right">
-                <nav class="nav affix-top">
+
+            <div class="col-md-3" role="navigation" >
+                <nav class="nav affix-top" id="navbar-right">
+                    {% for template in arrayTemplates %}
                     <ul class="nav nav-pills nav-stacked" role="tablist">
                         <li>
-                            <a href="#structure">Structure de la page</a>
-                        </li>
-                        <li>
-                            <a href="#en-tête">En-tête</a>
-                        </li>
-                        <li>
-                            <a href="#bloc-texte">Bloc texte</a>
-                        </li>
-                        <li>
-                            <a href="#titre">Titre</a>
-                        </li>
-                        <li>
-                            <a href="#bloc-événements">Bloc événements</a>
-                        </li>
-                        <li>
-                            <a href="#bloc-image">Bloc image</a>
-                        </li>
-                        <li>
-                            <a href="#bloc-vidéo">Bloc vidéo</a>
-                        </li>
-                        <li>
-                            <a href="#footer">Footer</a>
+                            <a href="#{{ template.template.href }}">{{ template.template.title }}</a>
                         </li>
                     </ul>
+                    {% endfor %}
                     <a class="back-to-top" href="#top"> Back to top </a>
                 </nav>
             </div>
+
         </div>
     </div>
 {% endblock %}
