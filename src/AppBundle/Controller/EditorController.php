@@ -31,8 +31,9 @@ class EditorController extends Controller
             }
         }
 
-
         $templates = $em->getRepository('AppBundle:Template')->getTemplatesByBrand($brand);
+
+        $brands = $em->getRepository('AppBundle:Brand')->findAll();
 
         $arrayTemplates = [];
 
@@ -46,6 +47,7 @@ class EditorController extends Controller
         // replace this example code with whatever you need
         return $this->render('AppBundle:Editor:index.html.twig', array(
             'arrayTemplates' => $arrayTemplates,
+            'brands' => $brands
         ));
     }
 }

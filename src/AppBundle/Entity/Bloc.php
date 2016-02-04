@@ -22,13 +22,6 @@ class Bloc
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="content", type="text")
-     */
-    private $content;
-
-    /**
      * @ORM\OneToMany(targetEntity="Alternative", mappedBy="bloc")
      */
     private $alternatives;
@@ -37,7 +30,6 @@ class Bloc
      * @ORM\ManyToMany(targetEntity="Template", mappedBy="blocs")
      */
     private $templates;
-
 
     /**
      * Get id
@@ -49,51 +41,6 @@ class Bloc
         return $this->id;
     }
 
-    /**
-     * Set content
-     *
-     * @param string $content
-     * @return Bloc
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    /**
-     * Get content
-     *
-     * @return string 
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * Set alternative
-     *
-     * @param boolean $alternative
-     * @return Bloc
-     */
-    public function setAlternative($alternative)
-    {
-        $this->alternative = $alternative;
-
-        return $this;
-    }
-
-    /**
-     * Get alternative
-     *
-     * @return boolean 
-     */
-    public function getAlternative()
-    {
-        return $this->alternative;
-    }
     /**
      * Constructor
      */
