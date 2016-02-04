@@ -1,0 +1,84 @@
+{% extends '@App/_layout.html.twig' %}
+
+{% block body %}
+    <!-- GLOBAL CONTAINER FOR EDITOR PAGE -->
+    <div class="container editor">
+        <div class="row">
+
+            <!-- PREVIEW CONTAINER -->
+            <div class="col-md-9 left-container" role="main">
+                <div class="row left-container_head">
+                    <div class="col-xs-6 head_left">
+                        <h4>Prévisualisation</h4>
+                    </div>
+                    <div class="col-xs-6 head-right">
+                        <button type="button" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Télécharger
+                        </button>
+                    </div>
+                </div>
+                <div class="preview-zone">
+                    <div class="row">
+                        <div class="col-xs-6 col-xs-offset-3">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">Titre</span>
+                                <input type="text" class="form-control" placeholder="Veuillez inscrire votre titre..." aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEWSLETTER BLOCKS CONTAINER -->
+            <div class="col-md-3 block-container" role="navigation" >
+                <div class="row block-container_head">
+                    <div class="col-xs-12">
+                        <h4>Modèles de blocs</h4>
+                    </div>
+                </div>
+                <div class="blocks-list">
+                    <nav class="nav affix-top">
+                        <ul class="nav nav-pills nav-stacked" role="tablist">
+                            <li>
+                                <div class="blockType" id="testBlock">
+                                    En-tete <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="blockType">
+                                    Bloc texte
+                                </div>
+                            </li>
+                            <li>
+                                <div class="blockType">
+                                    Titre
+                                </div>
+                            </li>
+                            <li>
+                                <div class="blockType">
+                                    Bloc évènement
+                                </div>
+                            </li>
+                            <li>
+                                <div class="blockType">
+                                    Bloc image
+                                </div>
+                            </li>
+                            <li>
+                                <div class="blockType">
+                                    Bloc video
+                                </div>
+                            </li>
+                            <li>
+                                <div class="blockType">
+                                    Footer
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
