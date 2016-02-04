@@ -4,14 +4,13 @@
     <!-- GLOBAL CONTAINER FOR EDITOR PAGE -->
     <div class="container editor">
         <div class="row">
-
             <!-- PREVIEW CONTAINER -->
-            <div class="col-md-9 left-container" role="main">
-                <div class="row left-container_head">
-                    <div class="col-xs-6 head_left">
+            <div class="col-md-9 left-content" role="main">
+                <div class="row left-content__head">
+                    <div class="col-xs-6 text-left">
                         <h4>Prévisualisation</h4>
                     </div>
-                    <div class="col-xs-6 head-right">
+                    <div class="col-xs-6 text-right">
                         <button type="button" class="btn btn-primary">
                             <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Télécharger
                         </button>
@@ -19,10 +18,18 @@
                 </div>
                 <div class="preview-zone">
                     <div class="row">
-                        <div class="col-xs-6 col-xs-offset-3">
+                        <div class="col-xs-6 col-xs-offset-3 preview-title">
                             <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon1">Titre</span>
-                                <input type="text" class="form-control" placeholder="Veuillez inscrire votre titre..." aria-describedby="basic-addon1">
+                                <input type="text" class="form-control" placeholder="Veuillez inscrire votre titre..."
+                                       aria-describedby="basic-addon1">
+                            </div>
+                            <div class="preview__body">
+                                <!--
+
+                                CORPS DE PREVIEW
+
+                                -->
                             </div>
                         </div>
                     </div>
@@ -30,55 +37,37 @@
             </div>
 
             <!-- NEWSLETTER BLOCKS CONTAINER -->
-            <div class="col-md-3 block-container" role="navigation" >
-                <div class="row block-container_head">
+            <div class="col-md-3 block-content" role="navigation">
+                <div class="row block-content__head">
                     <div class="col-xs-12">
                         <h4>Modèles de blocs</h4>
                     </div>
                 </div>
                 <div class="blocks-list">
-                    <nav class="nav affix-top">
+                    <nav class="nav">
                         <ul class="nav nav-pills nav-stacked" role="tablist">
-                            <li>
-                                <div class="blockType" id="testBlock">
-                                    En-tete <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="blockType">
-                                    Bloc texte
-                                </div>
-                            </li>
-                            <li>
-                                <div class="blockType">
-                                    Titre
-                                </div>
-                            </li>
-                            <li>
-                                <div class="blockType">
-                                    Bloc évènement
-                                </div>
-                            </li>
-                            <li>
-                                <div class="blockType">
-                                    Bloc image
-                                </div>
-                            </li>
-                            <li>
-                                <div class="blockType">
-                                    Bloc video
-                                </div>
-                            </li>
-                            <li>
-                                <div class="blockType">
-                                    Footer
-                                </div>
-                            </li>
+                            {% for template in arrayTemplates %}
+                                <li>
+                                    {% for bloc in template.blocs %}
+                                        {% if bloc.alternatives|length > 1 %}
+                                            <div class="variantes-popup">
+                                                {% for alternative in bloc.alternatives %}
+                                                    <button type="button" class="btn btn-info btn-sm popup-btn" draggable="true">
+                                                        {{ alternative.title }}
+                                                    </button>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                        <button type="button" class="btn btn-info block-btn" draggable="true">
+                                            {{ template.template.title }}
+                                        </button>
+                                    {% endfor %}
+                                </li>
+                            {% endfor %}
                         </ul>
                     </nav>
                 </div>
             </div>
-
         </div>
     </div>
 {% endblock %}
