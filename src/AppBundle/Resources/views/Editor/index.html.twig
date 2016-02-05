@@ -72,26 +72,26 @@
                 </div>
                 <div class="blocks-list">
                     <nav class="nav">
-                        <ul class="nav nav-pills nav-stacked" role="tablist">
                             {% for template in arrayTemplates %}
-                                <li>
-                                    {% for bloc in template.blocs %}
-                                        {% if bloc.alternatives|length > 1 %}
-                                            <div class="variantes-popup">
-                                                {% for alternative in bloc.alternatives %}
-                                                    <button type="button" class="btn btn-info btn-sm popup-btn" draggable="true">
-                                                        {{ alternative.title }}
-                                                    </button>
-                                                {% endfor %}
-                                            </div>
-                                        {% endif %}
+                                {% for bloc in template.blocs %}
+                                    {% if bloc.alternatives|length > 1 %}
+                                        <div class="variantes-popup">
+                                            {% for alternative in bloc.alternatives %}
+                                                <button type="button" class="btn btn-info btn-sm popup-btn" draggable="true">
+                                                    {{ alternative.title }}
+                                                </button>
+                                            {% endfor %}
+                                        </div>
+                                        <button type="button" class="btn btn-info block-btn has-alternatives">
+                                            {{ template.template.title }}
+                                        </button>
+                                    {% else %}
                                         <button type="button" class="btn btn-info block-btn" draggable="true">
                                             {{ template.template.title }}
                                         </button>
-                                    {% endfor %}
-                                </li>
+                                        {% endif %}
+                                        {% endfor %}
                             {% endfor %}
-                        </ul>
                     </nav>
                 </div>
             </div>

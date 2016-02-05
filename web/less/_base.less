@@ -109,13 +109,18 @@
 
 
 .variantes-popup {
-  background-color: rgba(0,0,0,0.5);
-  padding: 1vh 1vw;
+  background-color: @black;
   height: auto;
   position: absolute;
-  top: 120%;
+  bottom: 25%;
   width: 100%;
+  z-index: 10;
+  padding: 0 10px;
+  display:none;
   .popup-btn{
-    display: inline-block;
+    display: block;
+    width: 100%;
+    margin-bottom: 1vh;
+    margin-top: 1vh;
   }
 }
