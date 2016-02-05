@@ -38,7 +38,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="preview-zone">
+                <div class="preview-zone col-xs-12">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-3 preview-title">
                             <div class="input-group">
@@ -46,14 +46,15 @@
                                 <input type="text" class="form-control" placeholder="Veuillez inscrire votre titre..."
                                        aria-describedby="basic-addon1">
                             </div>
-                            <div class="preview__body">
-                                <!--
-
-                                CORPS DE PREVIEW
-
-                                -->
-                            </div>
                         </div>
+                    </div>
+
+                    <div class="block-drop-zone col-xs-12">
+                        <!--
+
+                        CORPS DE PREVIEW
+
+                        -->
                     </div>
                 </div>
             </div>
@@ -67,29 +68,38 @@
                 </div>
                 <div class="blocks-list">
                     <nav class="nav">
-                        <ul class="nav nav-pills nav-stacked" role="tablist">
                             {% for template in arrayTemplates %}
-                                <li>
-                                    {% for bloc in template.blocs %}
-                                        {% if bloc.alternatives|length > 1 %}
-                                            <div class="variantes-popup">
-                                                {% for alternative in bloc.alternatives %}
-                                                    <button type="button" class="btn btn-info btn-sm popup-btn" draggable="true">
-                                                        {{ alternative.title }}
+                                {% for bloc in template.blocs %}
+                                    {% if bloc.alternatives|length > 1 %}
+                                                <div class="dropdown">
+                                                    <button class="btn btn-primary dropdown-toggle block-btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                        {{ template.template.title }}
+                                                        <span class="caret"></span>
                                                     </button>
-                                                {% endfor %}
-                                            </div>
-                                        {% endif %}
-                                        <button type="button" class="btn btn-info block-btn" draggable="true">
+                                                    <ul class="dropdown-menu block-dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                        {% for alternative in bloc.alternatives %}
+                                                        <li>
+                                                            <button type="button" class="btn btn-info block-btn block-draggable" draggable="true">{{ alternative.title }}</button>
+                                                        </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                    {% else %}
+                                        <button type="button" class="btn btn-primary block-btn block-draggable" draggable="true">
                                             {{ template.template.title }}
                                         </button>
-                                    {% endfor %}
-                                </li>
+                                        {% endif %}
+                                        {% endfor %}
                             {% endfor %}
-                        </ul>
                     </nav>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/script.js') }}"></script>
+
+    {{ parent('') }}
 {% endblock %}

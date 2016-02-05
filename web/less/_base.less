@@ -79,12 +79,21 @@
 }
 
 .preview-zone {
-  border: 1px dotted dimgrey;
+  border: 1px solid dimgrey;
   min-height: 70vh;
 }
 
 .preview-title {
   margin-top: 2vh;
+}
+
+.block-drop-zone {
+  border: 1px dotted dimgrey;
+  min-height: 5vh;
+  margin: 1vh 0;
+  padding: 0;
+  width: 100%;
+
 }
 
 /*
@@ -100,6 +109,7 @@
 
 .block-content__head {
   line-height: 36px;
+  text-align: center;
 }
 
 .block-btn {
@@ -107,15 +117,10 @@
   margin-bottom: 1vh;
 }
 
-
-.variantes-popup {
-  background-color: rgba(0,0,0,0.5);
-  padding: 1vh 1vw;
-  height: auto;
-  position: absolute;
-  top: 120%;
+.block-dropdown-menu {
   width: 100%;
-  .popup-btn{
-    display: inline-block;
-  }
+  position: relative;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
 }
