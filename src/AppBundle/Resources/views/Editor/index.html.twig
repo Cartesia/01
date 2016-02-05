@@ -48,8 +48,8 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="block-drop-zone col-xs-12">
+
                         <!--
 
                         CORPS DE PREVIEW
@@ -68,29 +68,29 @@
                 </div>
                 <div class="blocks-list">
                     <nav class="nav">
-                            {% for template in arrayTemplates %}
-                                {% for bloc in template.blocs %}
-                                    {% if bloc.alternatives|length > 1 %}
-                                                <div class="dropdown">
-                                                    <button class="btn btn-primary dropdown-toggle block-btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        {{ template.template.title }}
-                                                        <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu block-dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                        {% for alternative in bloc.alternatives %}
-                                                        <li>
-                                                            <button type="button" class="btn btn-info block-btn block-draggable" draggable="true">{{ alternative.title }}</button>
-                                                        </li>
-                                                        {% endfor %}
-                                                    </ul>
-                                                </div>
-                                    {% else %}
-                                        <button type="button" class="btn btn-primary block-btn block-draggable" draggable="true">
+                        {% for template in arrayTemplates %}
+                            {% for bloc in template.blocs %}
+                                {% if bloc.alternatives|length > 1 %}
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle block-btn" id="{{ template.template.title }}" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                             {{ template.template.title }}
+                                            <span class="caret"></span>
                                         </button>
-                                        {% endif %}
-                                        {% endfor %}
+                                        <ul class="dropdown-menu block-dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            {% for alternative in bloc.alternatives %}
+                                                <li>
+                                                    <button type="button" class="btn btn-info block-btn block-draggable" id="{{ alternative.title }}">{{ alternative.title }}</button>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% else %}
+                                    <button type="button" class="btn btn-primary block-btn block-draggable" id="{{ template.template.title }}">
+                                        {{ template.template.title }}
+                                    </button>
+                                {% endif %}
                             {% endfor %}
+                        {% endfor %}
                     </nav>
                 </div>
             </div>
@@ -99,7 +99,7 @@
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/jquery-ui.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
-
-    {{ parent('') }}
 {% endblock %}

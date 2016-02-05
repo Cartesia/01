@@ -1,5 +1,12 @@
-/**
- * Created by Ankanitti on 05/02/16.
- */
+$(document).ready(function(){
+    console.log('DOM+jQuery ready...');
+
+    $('.block-draggable').draggable();
+
+
+});
+
+
+
 
 
