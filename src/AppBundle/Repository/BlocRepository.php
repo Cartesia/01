@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -20,7 +21,19 @@ class BlocRepository extends EntityRepository
             ->setParameter('template', $template)
             ->getQuery()->getResult()
         ;
+    }
 
+    public function findApi($id = null)
+    {
+        $qb = $this->createQueryBuilder('b');
 
+        if(null != $id){
+            $qb
+                ->where('b.id = :id')
+                ->setParameter(':id', $id)
+            ;
+        }
+
+        return  null === $id ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getSingleResult(AbstractQuery::HYDRATE_ARRAY);
     }
 }

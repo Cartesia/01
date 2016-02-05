@@ -33,7 +33,6 @@ class DefaultController extends Controller
 
         $brands = $em->getRepository('AppBundle:Brand')->findAll();
 
-
         $arrayTemplates = [];
 
         foreach ($templates as $template) {

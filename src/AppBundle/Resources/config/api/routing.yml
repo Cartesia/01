@@ -1,0 +1,3 @@
+api_bloc:
+    path: "/bloc/{id}"
+    defaults: {_controller: AppBundle:Api:bloc }
