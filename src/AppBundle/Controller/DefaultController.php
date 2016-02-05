@@ -19,7 +19,7 @@ class DefaultController extends Controller
         if (!$slug) {
             $brand = $em->getRepository('AppBundle:Brand')->getFirstBrand();
             if (!$brand) {
-                throw new NotFoundHttpException("404");
+                throw new NotFoundHttpException("404 not Brand");
             }
             return $this->redirectToRoute('show_template', ['slug_brand' => $brand->getSlug()], 301);
         } else {
