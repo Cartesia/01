@@ -1,5 +1,10 @@
 {% extends '@App/_layout.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/prism.css') }}">
+{% endblock %}
+
 {% block nav_documentation %}
     {% for brand in brands %}
         <ul class="nav navbar-nav">
@@ -80,7 +85,6 @@
                 {% endfor %}
             </div>
 
-
             <div class="col-md-3" role="navigation" >
                 <nav class="nav affix-top" id="navbar-right">
                     {% for template in arrayTemplates %}
@@ -93,7 +97,12 @@
                     <a class="back-to-top" href="#top"> Back to top </a>
                 </nav>
             </div>
-
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/prism.js') }}"></script>
+
+    {{ parent() }}
 {% endblock %}

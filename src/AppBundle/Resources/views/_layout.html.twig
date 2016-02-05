@@ -8,12 +8,6 @@
         <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        {#{% stylesheets output='bundles/css/*.css' filter='cssrewrite'
-        'css/style.css'
-        'css/prism.css'
-        %}
-        <link rel="stylesheet" href="{{ asset_url }}"/>
-        {% endstylesheets %}#}
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
@@ -47,12 +41,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    {% javascripts output='bundles/js/*.js'
-    'js/prism.js'
-    %}
-    <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-
 {% endblock %}
+
 </body>
 </html>
