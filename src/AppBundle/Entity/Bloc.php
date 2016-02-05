@@ -32,6 +32,11 @@ class Bloc
     private $templates;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\NewsBloc", mappedBy="bloc", cascade={"persist"})
+     */
+    private $newsbloc;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -113,5 +118,38 @@ class Bloc
     public function getTemplates()
     {
         return $this->templates;
+    }
+
+    /**
+     * Add newsbloc
+     *
+     * @param \AppBundle\Entity\NewsBloc $newsbloc
+     * @return Bloc
+     */
+    public function addNewsbloc(\AppBundle\Entity\NewsBloc $newsbloc)
+    {
+        $this->newsbloc[] = $newsbloc;
+
+        return $this;
+    }
+
+    /**
+     * Remove newsbloc
+     *
+     * @param \AppBundle\Entity\NewsBloc $newsbloc
+     */
+    public function removeNewsbloc(\AppBundle\Entity\NewsBloc $newsbloc)
+    {
+        $this->newsbloc->removeElement($newsbloc);
+    }
+
+    /**
+     * Get newsbloc
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNewsbloc()
+    {
+        return $this->newsbloc;
     }
 }
