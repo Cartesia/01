@@ -4,13 +4,13 @@ $(document).ready(function() {
     var rmvBtn = "<button class='remove-button'>x</button>";
 
     // function to update index on sortable
-    var updateIndex = function() {
+    function updateIndex() {
         var items = $('.sortable').find('li');
         items.each(function(i) {
             $(this).attr('data-order',i + 1);
         });
-    };
-
+    }
+    
     // enable DnD of block elements
     $(".block-draggable").draggable({
         cancel : false,
@@ -23,6 +23,7 @@ $(document).ready(function() {
         drop : function(event,ui) {
             console.log("Item was Dropped");
             $(this).append($(ui.draggable).clone().data('html'));
+            lol();
             var n = $('.preview-zone__sortable li').size();
             $(this).find("li").last().attr('data-order',n)
                    .prepend(rmvBtn);
@@ -38,5 +39,6 @@ $(document).ready(function() {
             $(this).parent().remove();
             updateIndex();
         });
+
 
 });
