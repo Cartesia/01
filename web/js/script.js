@@ -1,44 +1,57 @@
 $(document).ready(function() {
 
-    var rmvBtn = "<button class='remove-button glyphicon glyphicon-remove'></button>";
+    // "remove-button" node
+    var rmvBtn = "<button class='remove-button'>x</button>";
 
+    // function to update index on sortable
+    var updateIndex = function() {
+        var items = $('.sortable').find('li');
+        items.each(function(i) {
+            $(this).attr('data-order',i + 1);
+        });
+    };
 
+    var lol = function() {
+        $('.editable-month').editable({
+            url: '/post',
+            format: 'YYY-MM-DD',
+            title: 'Enter comments'
+        });
+    };
+
+    // enable DnD of block elements
     $(".block-draggable").draggable({
         cancel : false,
         helper :'clone'
     });
 
+    // enable droppable zone
     $(".preview-zone__sortable").droppable({
         accept : ".block-draggable",
         drop : function(event,ui) {
             console.log("Item was Dropped");
             $(this).append($(ui.draggable).clone().data('html'));
+            lol();
             var n = $('.preview-zone__sortable li').size();
             $(this).find("li").last().attr('data-order',n)
-                   .prepend(rmvBtn);
-            // Au double clic sur le texte
-            $(this).find("li").dblclick(function(){
-                // On récupère sa valeur
-                txt = $(this).text();
-                // On ajoute un champ de saisie avec la valeur
-                $(this).html("<input value='"+txt+"' />");
-                // On la sélectionne par défaut
-                $(this).find("input").select();
-            });
+                .prepend(rmvBtn)
+
+            ;
+
         }
     });
 
-    $( ".sortable" ).sortable()
-                    .disableSelection()
-                    .on("click", ".remove-button", function() {
-                        $(this).parent().remove();
-                    });
 
 
+
+    // endable sortable, update index on reorder
+    $( ".sortable" ).sortable({
+        stop: updateIndex
+    })
+        .disableSelection()
+        .on("click", ".remove-button", function() {
+            $(this).parent().remove();
+            updateIndex();
+        });
 
 });
-
-
-
-
-

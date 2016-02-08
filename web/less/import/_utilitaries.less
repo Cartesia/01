@@ -180,9 +180,9 @@
 * FUNCTION
 *******************************************************/
 
-/*.margin-top(@margin-bottom) {
-	margin-top: @margin-bottom * 1.5;
-}*/
+.rem(@property, @pixel-value) {
+  @{property} : unit(@pixel-value/16, rem);
+}
 
 .grid-margin(@font-size: @base-font-size, @line-height: @base-line-height, @margin-top: false) {
 	@margin-bottom: @font-size * @line-height / 2;
@@ -194,8 +194,7 @@
 	.margin-top(@margin-bottom, @line-height);
 }
 
-.rounded(@radius: @rounded-value)
-{
+.rounded(@radius: @rounded-value) {
 	-webkit-border-radius: @radius;
 	-moz-border-radius: @radius;
 	border-radius: @radius;
@@ -208,4 +207,5 @@
 /******************************************************
 * END FUNCTION
 *******************************************************/
+
 
