@@ -1,6 +1,7 @@
-$(document).ready(function(){
-    console.log('DOM+jQuery ready...');
-    var rmvBtn = "<div class='remove-button'>x</div>";
+$(document).ready(function() {
+
+    var rmvBtn = "<button class='remove-button'>x</button>";
+
 
     $(".block-draggable").draggable({
         cancel : false,
@@ -9,22 +10,20 @@ $(document).ready(function(){
 
     $(".preview-zone__sortable").droppable({
         accept : ".block-draggable",
-        drop : function(event,ui){
+        drop : function(event,ui) {
             console.log("Item was Dropped");
             $(this).append($(ui.draggable).clone().data('html'));
             var n = $('.preview-zone__sortable li').size();
-            $(this).find("li").last().attr('data-order',n);
-            $(this).find("li").last().append(rmvBtn);
+            $(this).find("li").last().attr('data-order',n)
+                   .prepend(rmvBtn);
         }
     });
 
     $( ".sortable" ).sortable()
-                    .disableSelection();
-
-    $('.remove-button').on('click',function(){
-       $(this).parent()
-              . remove();
-    });
+                    .disableSelection()
+                    .on("click", ".remove-button", function() {
+                        $(this).parent().remove();
+                    });
 
 });
 

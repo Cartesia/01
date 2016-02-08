@@ -43,14 +43,23 @@
                         <div class="col-xs-6 col-xs-offset-3 preview-title">
                             <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon1">Titre</span>
-                                <input type="text" class="form-control" placeholder="Veuillez inscrire votre titre..."
+                                <input type="text" class="form-control" placeholder="Veuillez inscrire votre titre…"
                                        aria-describedby="basic-addon1">
                             </div>
                         </div>
                     </div>
-                    <ul class="sortable preview-zone__sortable">
-                        <!-- drop zone -->
-                    </ul>
+                    <table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #ffffff !important; font-family: Arial, Helvetica, Geneva, sans-serif;">
+                        <tbody>
+                        <tr>
+                            <td align="center">
+                                <ul class="sortable preview-zone__sortable">
+                                    <!-- drop zone -->
+                                </ul>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
 
@@ -62,31 +71,29 @@
                     </div>
                 </div>
                 <div class="blocks-list">
-                    <nav class="nav">
-                        {% for template in arrayTemplates %}
-                            {% for bloc in template.blocs %}
-                                {% if bloc.alternatives|length > 1 %}
-                                    <div class="dropdown">
-                                        <button class="btn btn-primary dropdown-toggle block-btn" id="{{ template.template.title }}" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                            {{ template.template.title }}
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu block-dropdown-menu" aria-labelledby="dropdownMenu1">
-                                            {% for alternative in bloc.alternatives %}
-                                                <li>
-                                                    <button type="button" class="btn btn-info block-btn block-draggable" data-html="<li data-order=''>{{ alternative.content }}</li>">{{ alternative.title }}</button>
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
-                                    </div>
-                                {% else %}
-                                    <button type="button" class="btn btn-primary block-btn block-draggable" data-html="<li data-order=''>{{ bloc.alternatives.first.content}}</li>">
+                    {% for template in arrayTemplates %}
+                        {% for bloc in template.blocs %}
+                            {% if bloc.alternatives|length > 1 %}
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle block-btn" id="{{ template.template.title }}" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                         {{ template.template.title }}
+                                        <span class="caret"></span>
                                     </button>
-                                {% endif %}
-                            {% endfor %}
+                                    <ul class="dropdown-menu block-dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        {% for alternative in bloc.alternatives %}
+                                            <li>
+                                                <button type="button" class="btn btn-info block-btn block-draggable" data-html="<li data-order=''>{{ alternative.content }}</li>">{{ alternative.title }}</button>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% else %}
+                                <button type="button" class="btn btn-primary block-btn block-draggable" data-html="<li data-order=''>{{ bloc.alternatives.first.content}}</li>">
+                                    {{ template.template.title }}
+                                </button>
+                            {% endif %}
                         {% endfor %}
-                    </nav>
+                    {% endfor %}`
                 </div>
             </div>
         </div>
