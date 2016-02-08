@@ -49,8 +49,7 @@
                         </div>
                     </div>
                     <ul class="sortable preview-zone__sortable">
-                        <li class="block-drop-zone">
-                        </li>
+                        <!-- drop zone -->
                     </ul>
                 </div>
             </div>
@@ -75,13 +74,13 @@
                                         <ul class="dropdown-menu block-dropdown-menu" aria-labelledby="dropdownMenu1">
                                             {% for alternative in bloc.alternatives %}
                                                 <li>
-                                                    <button type="button" class="btn btn-info block-btn block-draggable" data-html="{{ alternative.content }}">{{ alternative.title }}</button>
+                                                    <button type="button" class="btn btn-info block-btn block-draggable" data-html="<li data-order=''>{{ alternative.content }}</li>">{{ alternative.title }}</button>
                                                 </li>
                                             {% endfor %}
                                         </ul>
                                     </div>
                                 {% else %}
-                                    <button type="button" class="btn btn-primary block-btn block-draggable" data-html="{{ bloc.alternatives.first.content}}">
+                                    <button type="button" class="btn btn-primary block-btn block-draggable" data-html="<li data-order=''>{{ bloc.alternatives.first.content}}</li>">
                                         {{ template.template.title }}
                                     </button>
                                 {% endif %}
