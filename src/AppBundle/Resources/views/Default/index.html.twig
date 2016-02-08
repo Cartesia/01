@@ -1,11 +1,13 @@
 {% extends '@App/_layout.html.twig' %}
 
+{% block title %}{{ parent() }} Documentation{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/prism.css') }}">
 {% endblock %}
 
-{% block nav_documentation %}
+{% block nav %}
     {% for brand in brands %}
         <ul class="nav navbar-nav">
             <li>
