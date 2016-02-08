@@ -5,13 +5,19 @@ $(document).ready(function(){
         helper :'clone'
     });
 
-
-     $(".block-drop-zone").droppable({
+    $(".preview-zone__sortable").droppable({
         accept : ".block-draggable",
         drop : function(event,ui){
+            console.log("Item was Dropped");
             $(this).append($(ui.draggable).clone().data('html'));
+            var n = $('.preview-zone__sortable li').size();
+            $(this).find("li").last().attr('data-order',n);
         }
     });
+
+    $( ".sortable" ).sortable()
+                    .disableSelection();
+
 });
 
 
