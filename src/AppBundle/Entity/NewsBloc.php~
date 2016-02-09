@@ -104,4 +104,50 @@ class NewsBloc
     {
         return $this->content;
     }
+
+    /**
+     * Set news
+     *
+     * @param \AppBundle\Entity\News $news
+     * @return NewsBloc
+     */
+    public function setNews(\AppBundle\Entity\News $news = null)
+    {
+        $this->news = $news;
+
+        return $this;
+    }
+
+    /**
+     * Get news
+     *
+     * @return \AppBundle\Entity\News 
+     */
+    public function getNews()
+    {
+        return $this->news;
+    }
+
+    /**
+     * Set bloc
+     *
+     * @param \AppBundle\Entity\Bloc $bloc
+     * @return NewsBloc
+     */
+    public function setBloc(\AppBundle\Entity\Bloc $bloc = null)
+    {
+        $this->bloc = $bloc;
+
+        return $this;
+    }
+
+    /**
+     * Get bloc
+     *
+     * @return \AppBundle\Entity\Bloc 
+     */
+    public function getBloc()
+    {
+        return $this->bloc;
+    }
 }

@@ -3,7 +3,7 @@ $(document).ready(function() {
     // "remove-button" node
     var rmvBtn = "<button class='remove-button'>x</button>";
     var urlEditBtn = "<button class='edit-img__button'>Edit image</button>";
-    var editPopup = '<div class="edit-popup">src: <input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>alt: <input type="text" class="alt" placeholder="Description de l\'image" value=""><br> <button class="the-button">Valider</div>';
+    var editPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier l\'image</h3><div class="edit-popup__content">Source: <input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>Description: <input type="text" class="alt" placeholder="Description de l\'image" value=""><br><button class="the-button btn-primary">Valider</button></div></div>';
 
 
 
@@ -128,7 +128,7 @@ $(document).ready(function() {
             src.attr('value',img.attr('src'));
             alt.attr('value',img.attr('alt'));
         })
-        .on('click', '.edit-popup>.the-button', function() {
+        .on('click', '.edit-popup .the-button', function() {
             var img = $(this).closest('td').find("img");
             var src = $(this).parent().find('.src').val();
             var alt = $(this).parent().find('.alt').val();

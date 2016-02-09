@@ -22,6 +22,10 @@ class Bloc
     private $id;
 
     /**
+     * @ORM\Column(name="editor", type="boolean")
+     */
+    private $editor;
+    /**
      * @ORM\OneToMany(targetEntity="Alternative", mappedBy="bloc")
      */
     private $alternatives;
@@ -118,5 +122,38 @@ class Bloc
     public function getTemplates()
     {
         return $this->templates;
+    }
+
+    /**
+     * Add newsbloc
+     *
+     * @param \AppBundle\Entity\NewsBloc $newsbloc
+     * @return Bloc
+     */
+    public function addNewsbloc(\AppBundle\Entity\NewsBloc $newsbloc)
+    {
+        $this->newsbloc[] = $newsbloc;
+
+        return $this;
+    }
+
+    /**
+     * Remove newsbloc
+     *
+     * @param \AppBundle\Entity\NewsBloc $newsbloc
+     */
+    public function removeNewsbloc(\AppBundle\Entity\NewsBloc $newsbloc)
+    {
+        $this->newsbloc->removeElement($newsbloc);
+    }
+
+    /**
+     * Get newsbloc
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNewsbloc()
+    {
+        return $this->newsbloc;
     }
 }

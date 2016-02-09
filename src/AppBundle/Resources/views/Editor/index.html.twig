@@ -75,6 +75,7 @@
                 <div class="blocks-list">
                     {% for template in arrayTemplates %}
                         {% for bloc in template.blocs %}
+                            {% if bloc.editor == true %}
                             {% if bloc.alternatives|length > 1 %}
                                 <div class="dropdown">
                                     <button class="btn btn-primary dropdown-toggle block-btn" id="{{ template.template.title }}" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -84,18 +85,19 @@
                                     <ul class="dropdown-menu block-dropdown-menu" aria-labelledby="dropdownMenu1">
                                         {% for alternative in bloc.alternatives %}
                                             <li>
-                                                <button type="button" class="btn btn-info block-btn block-draggable" data-html="<li data-order=''>{{ alternative.content }}</li>">{{ alternative.title }}</button>
+                                                <button type="button" class="btn btn-info block-btn block-draggable" data-html="<li data-order='' class='block-wrapper'>{{ alternative.content }}</li>">{{ alternative.title }}</button>
                                             </li>
                                         {% endfor %}
                                     </ul>
                                 </div>
                             {% else %}
-                                <button type="button" class="btn btn-primary block-btn block-draggable" data-html="<li data-order=''>{{ bloc.alternatives.first.content}}</li>">
+                                <button type="button" class="btn btn-primary block-btn block-draggable" data-html="<li data-order='' class='block-wrapper'>{{ bloc.alternatives.first.content}}</li>">
                                     {{ template.template.title }}
                                 </button>
                             {% endif %}
+                            {% endif %}
                         {% endfor %}
-                    {% endfor %}`
+                    {% endfor %}
                 </div>
             </div>
         </div>
