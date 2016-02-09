@@ -75,6 +75,7 @@
                 <div class="blocks-list">
                     {% for template in arrayTemplates %}
                         {% for bloc in template.blocs %}
+                            {% if bloc.editor == true %}
                             {% if bloc.alternatives|length > 1 %}
                                 <div class="dropdown">
                                     <button class="btn btn-primary dropdown-toggle block-btn" id="{{ template.template.title }}" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -93,6 +94,7 @@
                                 <button type="button" class="btn btn-primary block-btn block-draggable" data-html="<li data-order=''>{{ bloc.alternatives.first.content}}</li>">
                                     {{ template.template.title }}
                                 </button>
+                            {% endif %}
                             {% endif %}
                         {% endfor %}
                     {% endfor %}`
