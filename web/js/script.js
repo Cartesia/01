@@ -2,6 +2,8 @@ $(document).ready(function() {
 
     // "remove-button" node
     var rmvBtn = "<button class='remove-button'>x</button>";
+    var urlEditBtn = "<button class='edit-img__button'>Edit image</button>";
+    var editPopup = '<div class="edit-popup">src: <input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>alt: <input type="text" class="alt" placeholder="Description de l\'image" value=""><br> <button class="the-button">Valider</div>';
 
 
 
@@ -11,24 +13,21 @@ $(document).ready(function() {
         items.each(function(i) {
             $(this).attr('data-order',i + 1);
         });
-
     }
 
-    var editablePrompt = function() {
+    function editablePrompt() {
         $('.editable-text').editable({
-            url: '/post',
-            type: 'textarea',
-            title: 'Modifier le texte'
-        });
-        $('.editable-src').editable({
             url: '/post',
             type: 'textarea',
             title: 'Modifier le texte'
         });
         $('.editable-url').editable({
             url: '/post',
-            type: 'textarea',
-            title: 'Modifier le texte'
+            type: 'text',
+            title: 'Modifier le texte',
+            success: function(){
+                console.log($(this));
+            }
         });
         $('.editable-month').editable({
             url: '/post',
@@ -49,7 +48,6 @@ $(document).ready(function() {
                 {value: 12, text : 'DEC.'}
 
             ]
-
         });
         $('.editable-day').editable({
             url: '/post',
@@ -59,7 +57,6 @@ $(document).ready(function() {
                 weekStart: 1
             }
         });
-
         $('.editable-week').editable({
             url: '/post',
             type: 'select',
@@ -74,7 +71,6 @@ $(document).ready(function() {
                 {value: 7, text : 'DIM.'}
 
             ]
-
         });
         $('.editable-hours').editable({
             url: '/post',
@@ -102,10 +98,9 @@ $(document).ready(function() {
             editablePrompt();
             var n = $('.preview-zone__sortable li').size();
             $(this).find("li").last().attr('data-order',n)
-                .prepend(rmvBtn)
-
-            ;
-
+                .prepend(rmvBtn);
+            $(this).find("img").last().parent()
+                .before(urlEditBtn);
         }
     });
 
@@ -117,7 +112,30 @@ $(document).ready(function() {
         .on("click", ".remove-button", function() {
             $(this).parent().remove();
             updateIndex();
+        })
+        .on('click', ".edit-img__button", function() {
+            $(this).parent().prepend(editPopup);
+            var img = $(this).closest('td').find("img");
+            var src = $(this).parent().find('.src');
+            var alt = $(this).parent().find('.alt');
+            src.attr('value',img.attr('src'));
+            alt.attr('value',img.attr('alt'));
+        })
+        .on('click', '.edit-popup>.the-button', function() {
+            var img = $(this).closest('td').find("img");
+            var src = $(this).parent().find('.src');
+            var alt = $(this).parent().find('.alt');
+            if(src){
+                img.attr('src',src.val());
+            }
+            if(alt){
+                img.attr('alt',alt.val());
+            }
+            $(this).closest('.edit-popup').remove();
         });
 
+    $(".preview-zone__sortable").on('click', 'a', function(e) {
+        e.preventDefault();
+    });
 
 });
