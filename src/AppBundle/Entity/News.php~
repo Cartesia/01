@@ -65,4 +65,44 @@ class News
     {
         return $this->name;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->newsbloc = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add newsbloc
+     *
+     * @param \AppBundle\Entity\NewsBloc $newsbloc
+     * @return News
+     */
+    public function addNewsbloc(\AppBundle\Entity\NewsBloc $newsbloc)
+    {
+        $this->newsbloc[] = $newsbloc;
+
+        return $this;
+    }
+
+    /**
+     * Remove newsbloc
+     *
+     * @param \AppBundle\Entity\NewsBloc $newsbloc
+     */
+    public function removeNewsbloc(\AppBundle\Entity\NewsBloc $newsbloc)
+    {
+        $this->newsbloc->removeElement($newsbloc);
+    }
+
+    /**
+     * Get newsbloc
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNewsbloc()
+    {
+        return $this->newsbloc;
+    }
 }

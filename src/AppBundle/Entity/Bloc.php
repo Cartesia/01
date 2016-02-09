@@ -22,6 +22,10 @@ class Bloc
     private $id;
 
     /**
+     * @ORM\Column(name="editor", type="boolean")
+     */
+    private $editor;
+    /**
      * @ORM\OneToMany(targetEntity="Alternative", mappedBy="bloc")
      */
     private $alternatives;
@@ -151,5 +155,28 @@ class Bloc
     public function getNewsbloc()
     {
         return $this->newsbloc;
+    }
+
+    /**
+     * Set editor
+     *
+     * @param boolean $editor
+     * @return Bloc
+     */
+    public function setEditor($editor)
+    {
+        $this->editor = $editor;
+
+        return $this;
+    }
+
+    /**
+     * Get editor
+     *
+     * @return boolean 
+     */
+    public function getEditor()
+    {
+        return $this->editor;
     }
 }
