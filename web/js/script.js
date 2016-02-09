@@ -3,7 +3,7 @@ $(document).ready(function() {
     // "remove-button" node
     var rmvBtn = "<button class='remove-button'>x</button>";
     var urlEditBtn = "<button class='edit-img__button'>Edit image</button>";
-    var editPopup = '<div class="edit-popup">src: <input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>alt: <input type="text" class="alt" placeholder="Description de l\'image" value=""><br> <button class="the-button">Valider</div>';
+    var editPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier l\'image</h3><div class="edit-popup__content">Source: <input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>Description: <input type="text" class="alt" placeholder="Description de l\'image" value=""><br><button class="the-button btn-primary">Valider</button></div></div>';
 
 
 
@@ -24,9 +24,13 @@ $(document).ready(function() {
         $('.editable-url').editable({
             url: '/post',
             type: 'text',
-            title: 'Modifier le texte',
-            success: function(){
-                console.log($(this));
+            title: 'Modifier l\'url',
+            value: '',
+            display: function(value, response) {
+                return false;   //disable this method
+            },
+            success: function(response, newValue){
+                $(this).attr('href', newValue);
             }
         });
         $('.editable-month').editable({
@@ -99,8 +103,11 @@ $(document).ready(function() {
             var n = $('.preview-zone__sortable li').size();
             $(this).find("li").last().attr('data-order',n)
                 .prepend(rmvBtn);
-            $(this).find("img").last().parent()
-                .before(urlEditBtn);
+            var test = $(this).find("img").last();
+            if(test.hasClass('editable')){
+                $(this).find("img").last().parent()
+                    .before(urlEditBtn);
+            }
         }
     });
 
@@ -121,15 +128,15 @@ $(document).ready(function() {
             src.attr('value',img.attr('src'));
             alt.attr('value',img.attr('alt'));
         })
-        .on('click', '.edit-popup>.the-button', function() {
+        .on('click', '.edit-popup .the-button', function() {
             var img = $(this).closest('td').find("img");
-            var src = $(this).parent().find('.src');
-            var alt = $(this).parent().find('.alt');
-            if(src){
-                img.attr('src',src.val());
+            var src = $(this).parent().find('.src').val();
+            var alt = $(this).parent().find('.alt').val();
+            if(src!==''){
+                img.attr('src',src);
             }
-            if(alt){
-                img.attr('alt',alt.val());
+            if(alt!==''){
+                img.attr('alt',alt);
             }
             $(this).closest('.edit-popup').remove();
         });
