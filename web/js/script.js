@@ -84,7 +84,7 @@ $(document).ready(function() {
                 weekStart: 1
             }
         });
-    };
+    }
 
 
     // enable DnD of block elements
@@ -127,6 +127,8 @@ $(document).ready(function() {
             var alt = $(this).parent().find('.alt');
             src.attr('value',img.attr('src'));
             alt.attr('value',img.attr('alt'));
+            src.focus();
+
         })
         .on('click', '.edit-popup .the-button', function() {
             var img = $(this).closest('td').find("img");
