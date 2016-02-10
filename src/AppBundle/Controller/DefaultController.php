@@ -48,4 +48,6 @@ class DefaultController extends Controller
             'brands' => $brands
         ));
     }
+
+
 }
