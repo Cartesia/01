@@ -147,10 +147,30 @@ $(document).ready(function() {
             $(this).closest('.edit-popup').remove();
         });
 
+    // prevent redirection when trying to edit anchor tags
     $(".preview-zone__sortable").on('click', 'a', function(e) {
         e.preventDefault();
     });
 
+    // function to send data in POST
+    function openWithPostData(page,data)
+    {
+        var form = document.createElement('form'); // create a form
+        form.setAttribute('action', page); // set the action to 'ApiController.php'
+        form.setAttribute('method', 'post'); // set method to post
+        for (var n in data)
+        {
+            var inputvar = document.createElement('input'); // create a input
+            inputvar.setAttribute('type', 'hidden'); // set type to 'hidden' which will not display it in the browser rendering
+            inputvar.setAttribute('name', n); // set name to data 'n'
+            inputvar.setAttribute('value', data[n]); // set value to data[n]
+            form.appendChild(inputvar); // append inputvar to form
+        }
+        document.body.appendChild(form); // append form to DOM
+        form.submit(); // submit
+    }
+
+    // function to trim final content and POST to ApiController.
     var finalContent = "";
     $('#downloadLink').on('click', function(e) {
         e.preventDefault();
@@ -165,6 +185,9 @@ $(document).ready(function() {
         console.log(finalContent);
         $('.preview-zone__sortable li').prepend(rmvBtn);
 
+        openWithPostData('ApiController.php',finalContent);
+
     });
+
 
 });
