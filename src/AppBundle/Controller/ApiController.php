@@ -19,13 +19,15 @@ class ApiController extends Controller
     {
 
         if($request->getMethod() == 'POST'){
-            $blocks = $request->request->get('blocks');
+            $blocks = $request->get('blocks');
+            $title = $request->get('title');
 
             if( $blocks != null){
                 $nom = 'Newsletter_'.date('dmYis').'.html';
                 $filename = 'newsletter/'.$nom;
                 $file = file_put_contents($filename, $this->renderView('AppBundle::_structure.html.twig', array(
-                    'blocks' => $blocks
+                    'blocks' => $blocks,
+                    'title' => $title,
                 )));
                 $poids = filesize($filename);
                 if($file){
@@ -37,6 +39,8 @@ class ApiController extends Controller
                     header('Expires: 0');
                     readfile($filename);
                 }
+            }else{
+                throw $this->createNotFoundException('Fichier non trouvé');
             }
         }
 

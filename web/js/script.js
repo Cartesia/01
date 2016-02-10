@@ -159,21 +159,23 @@ $(document).ready(function() {
         form.setAttribute('action', page); // set the action to 'ApiController.php'
         form.setAttribute('method', 'post'); // set method to post
         form.setAttribute('target', '_blanck'); // set method to post
-
-        var inputvar = document.createElement('input'); // create a input
-        inputvar.setAttribute('type', 'hidden'); // set type to 'hidden' which will not display it in the browser rendering
-        inputvar.setAttribute('name', 'blocks'); // set name to data 'n'
-        inputvar.setAttribute('value', data); // set value to data[n]
-        form.appendChild(inputvar); // append inputvar to form
-
+        for (n in data){
+            var inputvar = document.createElement('input'); // create a input
+            inputvar.setAttribute('type', 'hidden'); // set type to 'hidden' which will not display it in the browser rendering
+            inputvar.setAttribute('name', n); // set name to data 'n'
+            inputvar.setAttribute('value', data[n]); // set value to data[n]
+            form.appendChild(inputvar); // append inputvar to form
+        }
         document.body.appendChild(form); // append form to DOM
         form.submit(); // submit
     }
 
     // function to trim final content and POST to ApiController.
 
+
     $('#downloadLink').on('click', function(e) {
         var finalContent = "";
+        var title = $('#title').val();
         e.preventDefault();
         var content = $('#content-to-download').find('li');
         var btns = $(content).find('button');
@@ -183,12 +185,9 @@ $(document).ready(function() {
             var content = $(this).html();
             finalContent += content;
         });
-        console.log(finalContent);
         $('.preview-zone__sortable li').prepend(rmvBtn);
 
-        openWithPostData($(this).attr('data-blocks'),finalContent);
+        openWithPostData($(this).attr('data-blocks'),{'title':title, 'blocks':finalContent});
 
     });
-
-
 });
