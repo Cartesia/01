@@ -171,11 +171,11 @@ $(document).ready(function() {
     }
 
     // function to trim final content and POST to ApiController.
-
     $('#downloadLink').on('click', function(e) {
         var finalContent = "";
         e.preventDefault();
         var content = $('#content-to-download').find('li');
+        $('[data-original-title]').removeAttr('data-original-title'); //remove data attr to all el with data-original-title attr
         var btns = $(content).find('button');
         btns.detach();
 
@@ -185,6 +185,7 @@ $(document).ready(function() {
         });
         console.log(finalContent);
         $('.preview-zone__sortable li').prepend(rmvBtn);
+
 
         openWithPostData($(this).attr('data-blocks'),finalContent);
 
