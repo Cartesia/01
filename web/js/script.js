@@ -178,14 +178,14 @@ $(document).ready(function() {
         var form = document.createElement('form'); // create a form
         form.setAttribute('action', page); // set the action to 'ApiController.php'
         form.setAttribute('method', 'post'); // set method to post
-        form.setAttribute('target', '_blank'); // set target to blank
-
-        var inputvar = document.createElement('input'); // create a input
-        inputvar.setAttribute('type', 'hidden'); // set type to 'hidden' which will not display it in the browser rendering
-        inputvar.setAttribute('name', 'blocks'); // set name to data 'n'
-        inputvar.setAttribute('value', data); // set value to data[n]
-        form.appendChild(inputvar); // append inputvar to form
-
+        form.setAttribute('target', '_blanck'); // set method to post
+        for (n in data){
+            var inputvar = document.createElement('input'); // create a input
+            inputvar.setAttribute('type', 'hidden'); // set type to 'hidden' which will not display it in the browser rendering
+            inputvar.setAttribute('name', n); // set name to data 'n'
+            inputvar.setAttribute('value', data[n]); // set value to data[n]
+            form.appendChild(inputvar); // append inputvar to form
+        }
         document.body.appendChild(form); // append form to DOM
         form.submit(); // submit
     }
@@ -193,6 +193,7 @@ $(document).ready(function() {
     // function to trim final content and POST to ApiController.
     $('#downloadLink').on('click', function(e) {
         var finalContent = "";
+        var title = $('#title').val();
         e.preventDefault();
         var content = $('#content-to-download').find('li');
         $('[data-original-title]').removeAttr('data-original-title'); //remove data attr to all el with data-original-title attr
@@ -203,13 +204,11 @@ $(document).ready(function() {
             var content = $(this).html();
             finalContent += content;
         });
-        console.log(finalContent);
         $('.preview-zone__sortable li').prepend(rmvBtn);
 
 
-        openWithPostData($(this).attr('data-blocks'),finalContent);
+        openWithPostData($(this).attr('data-blocks'),{'title':title, 'blocks':finalContent});
+
 
     });
-
-
 });
