@@ -2,8 +2,11 @@ $(document).ready(function() {
 
     // "remove-button" node
     var rmvBtn = "<button class='remove-button'>x</button>";
-    var urlEditBtn = "<button class='edit-img__button'>Edit image</button>";
-    var editPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier l\'image</h3><div class="edit-popup__content">Source: <input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>Description: <input type="text" class="alt" placeholder="Description de l\'image" value=""><br><button class="the-button btn-primary">Valider</button></div></div>';
+    var imgEditBtn = "<button class='edit-img__button'>Edit image</button>";
+    var vidEditBtn = "<button class='edit-vid__button'>Edit video</button>";
+    var imgEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier l\'image</h3><div class="edit-popup__content">Source: <br><input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>Description: <br><input type="text" class="alt" placeholder="Description de l\'image" value=""><br><button class="the-button btn-primary">Valider</button></div></div>';
+    var vidEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier l\'image</h3><div class="edit-popup__content">Source: <br><input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>Description: <br><input type="text" class="alt" placeholder="Description de l\'image" value=""><br>Lien vers la vidéo: <br><input type="text" class="vidUrl" placeholder="Lien vers la vidéo" value=""><br><button class="the-button btn-primary">Valider</button></div></div>';
+
 
     // function to update index on sortable
     function updateIndex() {
@@ -102,9 +105,11 @@ $(document).ready(function() {
             $(this).find("li").last().attr('data-order',n)
                 .prepend(rmvBtn);
             var test = $(this).find("img").last();
-            if(test.hasClass('editable')){
-                $(this).find("img").last().parent()
-                    .before(urlEditBtn);
+            if(test.hasClass('editable-src')){
+                $(this).find("img").last().parent().before(imgEditBtn);
+            }
+            if(test.hasClass('editable-vid')){
+                $(this).find('img').last().parent().before(vidEditBtn);
             }
         }
     });
@@ -114,38 +119,53 @@ $(document).ready(function() {
         stop: updateIndex
     })
         .disableSelection()
+        // indexation des blocs
         .on("click", ".remove-button", function() {
             $(this).parent().remove();
             updateIndex();
         })
+        // add img edit popup
         .on('click', ".edit-img__button", function() {
-            $(this).parent().prepend(editPopup);
+            $(this).parent().prepend(imgEditPopup);
             var img = $(this).closest('td').find("img");
             var src = $(this).parent().find('.src');
             var alt = $(this).parent().find('.alt');
+            src.attr('value', img.attr('src'));
+            alt.attr('value', img.attr('alt'));
+        })
+
+        // add vid edit popup
+        .on('click', ".edit-vid__button", function() {
+            $(this).parent().prepend(vidEditPopup);
+            var img = $(this).closest('td').find("img");
+            var a = img.parent();
+            console.log(a);
+            var src = $(this).parent().find('.src');
+            var alt = $(this).parent().find('.alt');
+            var href = $(this).parent().find('.vidUrl');
             src.attr('value',img.attr('src'));
             alt.attr('value',img.attr('alt'));
-            src.focus();
-            src.on('blur', function() {
-                alt.focus();
-            });
-            alt.on('blur', function() {
-                $(this).closest('.edit-popup').remove()
-            });
-
+            href.attr('value', a.attr('href'));
         })
+
         .on('click', '.edit-popup .the-button', function() {
             var img = $(this).closest('td').find("img");
+            var a = img.parent();
             var src = $(this).parent().find('.src').val();
             var alt = $(this).parent().find('.alt').val();
+            var href = $(this).parent().find('.vidUrl').val();
             if(src!==''){
                 img.attr('src',src);
             }
             if(alt!==''){
                 img.attr('alt',alt);
             }
+            if(href!==''){
+                a.attr('href',href);
+            }
             $(this).closest('.edit-popup').remove();
         });
+
 
     // prevent redirection when trying to edit anchor tags
     $(".preview-zone__sortable").on('click', 'a', function(e) {
@@ -158,7 +178,7 @@ $(document).ready(function() {
         var form = document.createElement('form'); // create a form
         form.setAttribute('action', page); // set the action to 'ApiController.php'
         form.setAttribute('method', 'post'); // set method to post
-        form.setAttribute('target', '_blanck'); // set method to post
+        form.setAttribute('target', '_blank'); // set target to blank
 
         var inputvar = document.createElement('input'); // create a input
         inputvar.setAttribute('type', 'hidden'); // set type to 'hidden' which will not display it in the browser rendering
