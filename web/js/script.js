@@ -5,9 +5,6 @@ $(document).ready(function() {
     var urlEditBtn = "<button class='edit-img__button'>Edit image</button>";
     var editPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier l\'image</h3><div class="edit-popup__content">Source: <input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>Description: <input type="text" class="alt" placeholder="Description de l\'image" value=""><br><button class="the-button btn-primary">Valider</button></div></div>';
 
-
-
-
     // function to update index on sortable
     function updateIndex() {
         var items = $('.sortable').find('li');
@@ -85,7 +82,7 @@ $(document).ready(function() {
                 weekStart: 1
             }
         });
-    };
+    }
 
 
     // enable DnD of block elements
@@ -128,6 +125,14 @@ $(document).ready(function() {
             var alt = $(this).parent().find('.alt');
             src.attr('value',img.attr('src'));
             alt.attr('value',img.attr('alt'));
+            src.focus();
+            src.on('blur', function() {
+                alt.focus();
+            });
+            alt.on('blur', function() {
+                $(this).closest('.edit-popup').remove()
+            });
+
         })
         .on('click', '.edit-popup .the-button', function() {
             var img = $(this).closest('td').find("img");
@@ -146,21 +151,20 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
-    // download
-    function downloadInnerHtml(filename, elId, mimeType) {
-        var elHtml = document.getElementById(elId).innerHTML;
-        var link = document.createElement('a');
-        mimeType = mimeType || 'text/plain';
+    var finalContent = "";
+    $('#downloadLink').on('click', function(e) {
+        e.preventDefault();
+        var content = $('#content-to-download').find('li');
+        var btns = $(content).find('button');
+        btns.detach();
 
-        link.setAttribute('download', filename);
-        link.setAttribute('href', 'data:' + mimeType  +  ';charset=utf-8,' + encodeURIComponent(elHtml));
-        link.click();
-    }
+        $(content).each(function(){
+            var content = $(this).html();
+            finalContent += content;
+        });
+        console.log(finalContent);
+        $('.preview-zone__sortable li').prepend(rmvBtn);
 
-    var fileName =  'tags.html'; // You can use the .txt extension if you want
-
-    $('#downloadLink').click(function(){
-        downloadInnerHtml(fileName, 'main','text/html');
     });
 
 });

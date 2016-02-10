@@ -17,13 +17,30 @@ class ApiController extends Controller
 {
     public function blocAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
 
-        $id = $request->get('id');
+        $blocks = $request->request->get('blocks');
 
-        $bloc = $em->getRepository('AppBundle:Bloc')->findApi($id);
+        echo $blocks;
 
-        return new JsonResponse($bloc);
+        if( $blocks != null){
+            $nom = 'Newsletter_'.date('dmYis').'.html';
+            $filename = 'newsletter/'.$nom;
+            $file = file_put_contents($filename, $this->renderView('AppBundle::_structure.html.twig', array(
+                'blocks' => $blocks
+            )));
+            $poids = filesize($filename);
+            if($file){
+                header('Content-Type: application/octet-stream');
+                header('Content-Length: '. $poids);
+                header('Content-disposition: attachment; filename='. $nom);
+                header('Pragma: no-cache');
+                header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+                header('Expires: 0');
+                readfile($filename);
+               // exit();
+            }
+        }
+
 
     }
 }
