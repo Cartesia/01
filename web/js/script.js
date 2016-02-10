@@ -5,7 +5,7 @@ $(document).ready(function() {
     var imgEditBtn = "<button class='edit-img__button'>Edit image</button>";
     var vidEditBtn = "<button class='edit-vid__button'>Edit video</button>";
     var imgEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier l\'image</h3><div class="edit-popup__content">Source: <br><input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>Description: <br><input type="text" class="alt" placeholder="Description de l\'image" value=""><br><button class="the-button btn-primary">Valider</button></div></div>';
-    var vidEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier l\'image</h3><div class="edit-popup__content">Source: <br><input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>Description: <br><input type="text" class="alt" placeholder="Description de l\'image" value=""><br>Lien vers la vidéo: <br><input type="text" class="vidUrl" placeholder="Lien vers la vidéo" value=""><br><button class="the-button btn-primary">Valider</button></div></div>';
+    var vidEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier la vidéo</h3><div class="edit-popup__content">Source: <br><input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>Description: <br><input type="text" class="alt" placeholder="Description de l\'image" value=""><br>Lien vers la vidéo: <br><input type="text" class="vidUrl" placeholder="Lien vers la vidéo" value=""><br><button class="the-button btn-primary">Valider</button></div></div>';
 
 
     // function to update index on sortable
