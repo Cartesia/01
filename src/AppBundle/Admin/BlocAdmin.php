@@ -14,7 +14,7 @@ class BlocAdmin extends Admin
     {
         $formMapper
             ->add('content')
-            ->add('title')
+            ->add('title', null, array('required' => false))
             ->add('template')
             ->add('editor')
         ;

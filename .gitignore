@@ -13,3 +13,4 @@
 /.idea
 /web/newsletter/*
 !web/newsletter/.gitkeep
+/web/config.codekit
