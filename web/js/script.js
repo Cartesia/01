@@ -2,10 +2,14 @@ $(document).ready(function() {
 
     // "remove-button" node
     var rmvBtn = "<button class='remove-button'>x</button>";
-    var imgEditBtn = "<button class='edit-img__button'>Edit image</button>";
-    var vidEditBtn = "<button class='edit-vid__button'>Edit video</button>";
+
+    var imgEditBtn = "<button class='edit-img__button'>Editer image</button>";
+    var vidEditBtn = "<button class='edit-vid__button'>Editer video</button>";
+    var txtEditBtn = "<button class='edit-txt__button'>Editer texte</button>";
+
     var imgEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier l\'image</h3><div class="edit-popup__content">Source: <br><input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>Description: <br><input type="text" class="alt" placeholder="Description de l\'image" value=""><br><button class="the-button btn-primary">Valider</button></div></div>';
     var vidEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier la vidéo</h3><div class="edit-popup__content">Source: <br><input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>Description: <br><input type="text" class="alt" placeholder="Description de l\'image" value=""><br>Lien vers la vidéo: <br><input type="text" class="vidUrl" placeholder="Lien vers la vidéo" value=""><br><button class="the-button btn-primary">Valider</button></div></div>';
+    var txtEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier le text</h3><div class="edit-popup__content">Contenu: <br><input type="textarea" class="txt" placeholder="Contenu texte" value=""><br><button class="the-button btn-primary">Valider</button></div></div>';
 
 
     // function to update index on sortable
@@ -17,18 +21,13 @@ $(document).ready(function() {
     }
 
     function editablePrompt() {
-        $('.editable-text').editable({
-            url: '/post',
-            type: 'textarea',
-            title: 'Modifier le texte'
-        });
         $('.editable-url').editable({
             url: '/post',
             type: 'text',
             title: 'Modifier l\'url',
             value: '',
             display: function(value, response) {
-                return false;   //disable this method
+                return false;   //disable this method for x reasons I can't recall
             },
             success: function(response, newValue){
                 $(this).attr('href', newValue);
@@ -99,17 +98,22 @@ $(document).ready(function() {
         accept : ".block-draggable",
         drop : function(event,ui) {
             console.log("Item was Dropped");
+            console.log($(this));
             $(this).append($(ui.draggable).clone().data('html'));
             editablePrompt();
             var n = $('.preview-zone__sortable li').size();
             $(this).find("li").last().attr('data-order',n)
                 .prepend(rmvBtn);
             var test = $(this).find("img").last();
+            var hasText = $(this).find('.editable-text').last();
             if(test.hasClass('editable-src')){
                 $(this).find("img").last().parent().before(imgEditBtn);
             }
             if(test.hasClass('editable-vid')){
                 $(this).find('img').last().parent().before(vidEditBtn);
+            }
+            if(hasText.hasClass('editable-text')){
+                $(this).find('.editable-text').before(txtEditBtn);
             }
         }
     });
@@ -148,12 +152,25 @@ $(document).ready(function() {
             href.attr('value', a.attr('href'));
         })
 
+        // add text edit popup
+        .on('click', ".edit-txt__button", function() {
+            $(this).parent().prepend(txtEditPopup);
+            var text = $(this).closest('td').find(".editable-text");
+            var content = $(this).parent().find('.txt');
+            content.attr('value',text.html());
+        })
+
         .on('click', '.edit-popup .the-button', function() {
+
             var img = $(this).closest('td').find("img");
             var a = img.parent();
+            var text = $(this).closest('td').find(".editable-text");
+
             var src = $(this).parent().find('.src').val();
             var alt = $(this).parent().find('.alt').val();
             var href = $(this).parent().find('.vidUrl').val();
+            var content = $(this).parent().find('.txt').html();
+
             if(src!==''){
                 img.attr('src',src);
             }
@@ -162,6 +179,10 @@ $(document).ready(function() {
             }
             if(href!==''){
                 a.attr('href',href);
+            }
+            if(content!==''){
+                console.log(text);
+                console.log(content);
             }
             $(this).closest('.edit-popup').remove();
         });
@@ -197,7 +218,9 @@ $(document).ready(function() {
         var content = $('#content-to-download');
 
         if (content.html() == "") {
+            alert('Champs de prévisualisation vide !');
             return false;
+
         }
 
         var blocks = content.find('li');
@@ -214,9 +237,8 @@ $(document).ready(function() {
         });
         $('.preview-zone__sortable li').prepend(rmvBtn);
 
-
         openWithPostData($(this).attr('data-blocks'),{'title':title, 'blocks':finalContent});
 
-
     });
+
 });
