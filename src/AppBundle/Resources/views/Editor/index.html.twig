@@ -3,13 +3,13 @@
 {% block title %}{{ parent() }} Editor{% endblock %}
 
 {% block nav%}
-    {% for brand in brands %}
-        <ul class="nav navbar-nav">
-            <li>
+    <ul class="nav navbar-nav" role="tablist">
+        {% for brand in brands %}
+            <li class="active">
                 <a href="#">{{ brand.name }}<span class="sr-only">(current)</span></a>
             </li>
-        </ul>
-    {% endfor %}
+        {% endfor %}
+    </ul>
     <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
             <a href="{{ path('default_template') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation<span class="caret"></span></a>
@@ -74,30 +74,28 @@
                     </div>
                 </div>
                 <div class="blocks-list">
-                    {% for template in arrayTemplates %}
-                        {% for bloc in template.blocs %}
-                            {% if bloc.editor == true %}
-                            {% if bloc.alternatives|length > 1 %}
+                    {% for t in arrayTemplates %}
+                        {% if t.blocs[0].editor == true %}
+                            {% if t.blocs|length != 1 %}
                                 <div class="dropdown">
-                                    <button class="btn btn-primary dropdown-toggle block-btn" id="{{ template.template.title }}" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                        {{ template.template.title }}
+                                    <button class="btn btn-primary dropdown-toggle block-btn" id="{{ t.template.title }}" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        {{ t.template.title }}
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu block-dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        {% for alternative in bloc.alternatives %}
+                                        {% for bloc in t.blocs %}
                                             <li>
-                                                <button type="button" class="btn btn-info block-btn block-draggable" data-html="<li data-order='' class='block-wrapper'>{{ alternative.content }}</li>">{{ alternative.title }}</button>
+                                                <button type="button" class="btn btn-info block-btn block-draggable" data-html="<li data-order='' class='block-wrapper'>{{ bloc.content }}</li>">{{ bloc.title }}</button>
                                             </li>
                                         {% endfor %}
                                     </ul>
                                 </div>
                             {% else %}
-                                <button type="button" class="btn btn-primary block-btn block-draggable" data-html="<li data-order='' class='block-wrapper'>{{ bloc.alternatives.first.content}}</li>">
-                                    {{ template.template.title }}
+                                <button type="button" class="btn btn-primary block-btn block-draggable" data-html="<li data-order='' class='block-wrapper'>{{ t.blocs[0].content}}</li>">
+                                    {{ t.template.title }}
                                 </button>
                             {% endif %}
-                            {% endif %}
-                        {% endfor %}
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>

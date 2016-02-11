@@ -209,6 +209,5 @@ $(document).ready(function() {
 
         openWithPostData($(this).attr('data-blocks'),{'title':title, 'blocks':finalContent});
 
-
     });
 });

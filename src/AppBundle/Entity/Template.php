@@ -43,8 +43,7 @@ class Template
     private $href;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Bloc", inversedBy="templates")
-     * @ORM\JoinTable(name="templates_blocs")
+     * @ORM\OneToMany(targetEntity="Bloc", mappedBy="template")
      */
     private $blocs;
 
@@ -53,6 +52,15 @@ class Template
      */
     private $brands;
 
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->blocs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->brands = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -132,13 +140,6 @@ class Template
     {
         return $this->href;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->blocs = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add blocs
@@ -204,5 +205,13 @@ class Template
     public function getBrands()
     {
         return $this->brands;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->title;
     }
 }

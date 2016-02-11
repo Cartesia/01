@@ -22,23 +22,43 @@ class Bloc
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="text")
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text")
+     */
+    private $content;
+
+    /**
      * @ORM\Column(name="editor", type="boolean")
      */
     private $editor;
-    /**
-     * @ORM\OneToMany(targetEntity="Alternative", mappedBy="bloc")
-     */
-    private $alternatives;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Template", mappedBy="blocs")
+     * @ORM\ManyToOne(targetEntity="Template", inversedBy="blocs")
+     * @ORM\JoinColumn(name="template_id", nullable=false)
      */
-    private $templates;
+    private $template;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\NewsBloc", mappedBy="bloc", cascade={"persist"})
      */
     private $newsbloc;
+
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->newsbloc = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -51,79 +71,75 @@ class Bloc
     }
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->alternatives = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add alternatives
+     * Set title
      *
-     * @param \AppBundle\Entity\Alternative $alternatives
+     * @param string $title
      * @return Bloc
      */
-    public function addAlternative(\AppBundle\Entity\Alternative $alternatives)
+    public function setTitle($title)
     {
-        $this->alternatives[] = $alternatives;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Remove alternatives
+     * Get title
      *
-     * @param \AppBundle\Entity\Alternative $alternatives
+     * @return string 
      */
-    public function removeAlternative(\AppBundle\Entity\Alternative $alternatives)
+    public function getTitle()
     {
-        $this->alternatives->removeElement($alternatives);
+        return $this->title;
     }
 
     /**
-     * Get alternatives
+     * Set content
      *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getAlternatives()
-    {
-        return $this->alternatives;
-    }
-
-    /**
-     * Add templates
-     *
-     * @param \AppBundle\Entity\Template $templates
+     * @param string $content
      * @return Bloc
      */
-    public function addTemplate(\AppBundle\Entity\Template $templates)
+    public function setContent($content)
     {
-        $this->templates[] = $templates;
+        $this->content = $content;
 
         return $this;
     }
 
     /**
-     * Remove templates
+     * Get content
      *
-     * @param \AppBundle\Entity\Template $templates
+     * @return string 
      */
-    public function removeTemplate(\AppBundle\Entity\Template $templates)
+    public function getContent()
     {
-        $this->templates->removeElement($templates);
+        return $this->content;
     }
 
     /**
-     * Get templates
+     * Set editor
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @param boolean $editor
+     * @return Bloc
      */
-    public function getTemplates()
+    public function setEditor($editor)
     {
-        return $this->templates;
+        $this->editor = $editor;
+
+        return $this;
     }
 
+    /**
+     * Get editor
+     *
+     * @return boolean 
+     */
+    public function getEditor()
+    {
+        return $this->editor;
+    }
+
+   
     /**
      * Add newsbloc
      *
