@@ -21,6 +21,11 @@ $(document).ready(function() {
     }
 
     function editablePrompt() {
+        $('.editable-title').editable({
+            url : '/post',
+            type : 'text',
+            title : 'Modifier titre'
+        });
         $('.editable-url').editable({
             url: '/post',
             type: 'text',
@@ -169,7 +174,7 @@ $(document).ready(function() {
             var src = $(this).parent().find('.src').val();
             var alt = $(this).parent().find('.alt').val();
             var href = $(this).parent().find('.vidUrl').val();
-            var content = $(this).parent().find('.txt').html();
+            var content = $(this).parent().find('.txt').val();
 
             if(src!==''){
                 img.attr('src',src);
@@ -181,8 +186,7 @@ $(document).ready(function() {
                 a.attr('href',href);
             }
             if(content!==''){
-                console.log(text);
-                console.log(content);
+                text.text(content);
             }
             $(this).closest('.edit-popup').remove();
         });

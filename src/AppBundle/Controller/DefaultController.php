@@ -31,6 +31,7 @@ class DefaultController extends Controller
 
         $templates = $em->getRepository('AppBundle:Template')->getTemplatesByBrand($brand);
 
+
         $brands = $em->getRepository('AppBundle:Brand')->findAll();
 
         $arrayTemplates = [];
@@ -40,7 +41,6 @@ class DefaultController extends Controller
             $arrayTemplates[$template->getId()]['template'] = $template;
             $arrayTemplates[$template->getId()]['blocs'] = $listBlocs;
         }
-
 
         // replace this example code with whatever you need
         return $this->render('AppBundle:Default:index.html.twig', array(

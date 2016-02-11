@@ -137,4 +137,12 @@ class Brand
     {
         return $this->slug;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

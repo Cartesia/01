@@ -16,24 +16,11 @@ class BlocRepository extends EntityRepository
     public function getBlocsByTemplate($template)
     {
         return $this->createQueryBuilder('b')
-            ->leftJoin('b.templates', 't')
+            ->LeftJoin('b.template', 't')
             ->where('t = :template')
             ->setParameter('template', $template)
             ->getQuery()->getResult()
         ;
     }
 
-    public function findApi($id = null)
-    {
-        $qb = $this->createQueryBuilder('b');
-
-        if(null != $id){
-            $qb
-                ->where('b.id = :id')
-                ->setParameter(':id', $id)
-            ;
-        }
-
-        return  null === $id ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getSingleResult(AbstractQuery::HYDRATE_ARRAY);
-    }
 }

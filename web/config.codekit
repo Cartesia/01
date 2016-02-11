@@ -31,55 +31,6 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
-	"\/bundles\/framework\/css\/body.css": {
-		"fileType": 16,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/bundles\/framework\/css\/body.css",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/bundles\/framework\/css\/exception.css": {
-		"fileType": 16,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/bundles\/framework\/css\/exception.css",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/bundles\/framework\/css\/structure.css": {
-		"fileType": 16,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/bundles\/framework\/css\/structure.css",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/bundles\/framework\/images\/grey_magnifier.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 393,
-		"inputAbbreviatedPath": "\/bundles\/framework\/images\/grey_magnifier.png",
-		"outputAbbreviatedPath": "\/bundles\/framework\/images\/grey_magnifier.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/bundles\/framework\/images\/logo_symfony.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 1459,
-		"inputAbbreviatedPath": "\/bundles\/framework\/images\/logo_symfony.png",
-		"outputAbbreviatedPath": "\/bundles\/framework\/images\/logo_symfony.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
 	"\/config.php": {
 		"fileType": 8192,
 		"ignore": 0,
