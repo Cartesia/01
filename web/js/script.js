@@ -192,17 +192,25 @@ $(document).ready(function() {
 
     // function to trim final content and POST to ApiController.
     $('#downloadLink').on('click', function(e) {
+        e.preventDefault();
+
+        var content = $('#content-to-download');
+
+        if (content.html() == "") {
+            return false;
+        }
+
+        var blocks = content.find('li');
         var finalContent = "";
         var title = $('#title').val();
-        e.preventDefault();
-        var content = $('#content-to-download').find('li');
+
         $('[data-original-title]').removeAttr('data-original-title'); //remove data attr to all el with data-original-title attr
-        var btns = $(content).find('button');
+        var btns = $(blocks).find('button');
         btns.detach();
 
-        $(content).each(function(){
-            var content = $(this).html();
-            finalContent += content;
+        $(blocks).each(function(){
+            var blocks = $(this).html();
+            finalContent += blocks;
         });
         $('.preview-zone__sortable li').prepend(rmvBtn);
 
