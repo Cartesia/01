@@ -186,6 +186,23 @@
   }
 }
 
+.edit-txt__button {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  font-size: 16px;
+  color: @white;
+  background-color: fade(@black, 50%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  &:hover {
+    opacity: 1;
+  }
+}
+
 .edit-popup {
   z-index: 1000;
   font-size: 14px;
@@ -248,7 +265,7 @@
   border: 1px solid transparent;
   white-space: nowrap;
   vertical-align: middle;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 
