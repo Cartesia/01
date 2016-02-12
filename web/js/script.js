@@ -22,6 +22,12 @@ $(document).ready(function() {
             type: 'textarea',
             title: 'Modifier le texte'
         });
+
+        $('#comments').editable({
+            url: '/post',
+            title: 'Enter comments'
+        });
+
         $('.editable-url').editable({
             url: '/post',
             type: 'text',

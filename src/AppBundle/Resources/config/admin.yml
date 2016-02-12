@@ -3,16 +3,16 @@ services:
         class: AppBundle\Admin\BrandAdmin
         arguments: [ ~, AppBundle\Entity\Brand, ~ ]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Brands", label: "Brand" }
+            - { name: sonata.admin, manager_type: orm, group: "Doc-Editor", label: "Brand" }
 
     sonata.admin.template:
         class: AppBundle\Admin\TemplateAdmin
         arguments: [ ~, AppBundle\Entity\Template, ~ ]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Brands", label: "Template" }
+            - { name: sonata.admin, manager_type: orm, group: "Doc-Editor", label: "Template" }
 
     sonata.admin.bloc:
         class: AppBundle\Admin\BlocAdmin
         arguments: [ ~, AppBundle\Entity\Bloc, ~ ]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Brands", label: "Bloc" }
+            - { name: sonata.admin, manager_type: orm, group: "Doc-Editor", label: "Bloc" }
