@@ -5,12 +5,11 @@ $(document).ready(function() {
 
     var imgEditBtn = "<button class='edit-img__button'>Editer image</button>";
     var vidEditBtn = "<button class='edit-vid__button'>Editer video</button>";
-    var txtEditBtn = "<button class='edit-txt__button'></button>";
 
 
     var imgEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier l\'image</h3><div class="edit-popup__content">Source: <br><input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>Description: <br><input type="text" class="alt" placeholder="Description de l\'image" value=""><br><button class="the-button btn-primary">Valider</button></div></div>';
     var vidEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier la vidéo</h3><div class="edit-popup__content">Source: <br><input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>Description: <br><input type="text" class="alt" placeholder="Description de l\'image" value=""><br>Lien vers la vidéo: <br><input type="text" class="vidUrl" placeholder="Lien vers la vidéo" value=""><br><button class="the-button btn-primary">Valider</button></div></div>';
-    var txtEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier le texte</h3><div class="edit-popup__content"><button type="button" class="btn btn-default btn-sm style-bold"><span class="glyphicon glyphicon-bold" aria-hidden="true"></span> Bold </button><button type="button" class="btn btn-default btn-sm style-italic"><span class="glyphicon glyphicon-italic" aria-hidden="true"></span> Italic </button><div class="txt" contenteditable></div><br><button class="the-button-two the-text-btn btn-primary">Valider</button></div></div>';
+    var txtEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier le texte</h3><div class="edit-popup__content"><button type="button" class="btn btn-default btn-sm style-bold"><span class="glyphicon glyphicon-bold" aria-hidden="true"></span> Bold </button><button type="button" class="btn btn-default btn-sm style-italic"><span class="glyphicon glyphicon-italic" aria-hidden="true"></span> Italic </button><div class="txt" contenteditable></div><button class="the-button-two the-text-btn btn-primary">Valider</button></div></div>';
 
     // function to update index on sortable
     function updateIndex() {
@@ -124,16 +123,13 @@ $(document).ready(function() {
             if(hasMedia.hasClass('editable-vid')){
                 $(this).find('img').last().parent().before(vidEditBtn);
             }
-            if(hasText.hasClass('editable-text')) {
-                $(this).find('.editable-text').before(txtEditBtn);
-            }
         }
     });
 
     // endable sortable, update index on reorder
     $( ".sortable" ).sortable({
         stop: updateIndex,
-        cancel: '.edit-popup,button',
+        cancel: '.edit-popup,button,.popover',
         distance: 100
     })
         // indexation des blocs
@@ -166,13 +162,15 @@ $(document).ready(function() {
         })
 
         // add text edit popup
-        .on('click', ".edit-txt__button", function() {
+        .on('click', ".editable-text", function() {
+            console.log(this);
             $(this).parent().prepend(txtEditPopup);
-            $(this).closest('td').find('.editable-text').addClass('current-editing');
-            var text = $(this).closest('td').find(".editable-text").html();
-            var popup = $(this).closest('.preview-zone');
+            $(this).addClass('current-editing');
+            var text = $(this).html();
+            var popup = $(this).closest('td');
             var content = $(popup).find('.txt');
             $(content).html(text);
+            $('.txt').focus();
         })
 
         .on('click','.style-bold', function() {
@@ -269,5 +267,18 @@ $(document).ready(function() {
         openWithPostData($(this).attr('data-blocks'),{'title':title, 'blocks':finalContent});
 
     });
+
+    // function to remove popup when clicking outside
+    $(document).mouseup(function (e)
+    {
+        var container = $(".edit-popup");
+
+        if (!container.is(e.target) // if the target of the click isn't the container...
+            && container.has(e.target).length === 0) // ... nor a descendant of the container
+        {
+            container.remove();
+        }
+    });
+
 
 });
