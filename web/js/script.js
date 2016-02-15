@@ -5,12 +5,12 @@ $(document).ready(function() {
 
     var imgEditBtn = "<button class='edit-img__button'>Editer image</button>";
     var vidEditBtn = "<button class='edit-vid__button'>Editer video</button>";
-    var txtEditBtn = "<button class='edit-txt__button'>Editer texte</button>";
+    var txtEditBtn = "<button class='edit-txt__button'></button>";
+
 
     var imgEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier l\'image</h3><div class="edit-popup__content">Source: <br><input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>Description: <br><input type="text" class="alt" placeholder="Description de l\'image" value=""><br><button class="the-button btn-primary">Valider</button></div></div>';
     var vidEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier la vidéo</h3><div class="edit-popup__content">Source: <br><input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>Description: <br><input type="text" class="alt" placeholder="Description de l\'image" value=""><br>Lien vers la vidéo: <br><input type="text" class="vidUrl" placeholder="Lien vers la vidéo" value=""><br><button class="the-button btn-primary">Valider</button></div></div>';
-    var txtEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier le text</h3><div class="edit-popup__content">Contenu: <br><input type="textarea" class="txt" placeholder="Contenu texte" value=""><br><button class="the-button btn-primary">Valider</button></div></div>';
-
+    var txtEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier le texte</h3><div class="edit-popup__content"><button type="button" class="btn btn-default btn-sm style-bold"><span class="glyphicon glyphicon-bold" aria-hidden="true"></span> Bold </button><button type="button" class="btn btn-default btn-sm style-italic"><span class="glyphicon glyphicon-italic" aria-hidden="true"></span> Italic </button><div class="txt" contenteditable></div><br><button class="the-button-two the-text-btn btn-primary">Valider</button></div></div>';
 
     // function to update index on sortable
     function updateIndex() {
@@ -94,8 +94,9 @@ $(document).ready(function() {
 
     // enable DnD of block elements
     $(".block-draggable").draggable({
-        cancel : false,
-        helper :'clone'
+        cancel : '.edit-popup',
+        helper :'clone',
+        distance : 100
     });
 
     // enable droppable zone
@@ -103,21 +104,21 @@ $(document).ready(function() {
         accept : ".block-draggable",
         drop : function(event,ui) {
             console.log("Item was Dropped");
-            console.log($(this));
             $(this).append($(ui.draggable).clone().data('html'));
             editablePrompt();
             var n = $('.preview-zone__sortable li').size();
             $(this).find("li").last().attr('data-order',n)
                 .prepend(rmvBtn);
-            var test = $(this).find("img").last();
+
+            var hasMedia = $(this).find("img").last();
             var hasText = $(this).find('.editable-text').last();
-            if(test.hasClass('editable-src')){
+            if(hasMedia.hasClass('editable-src')){
                 $(this).find("img").last().parent().before(imgEditBtn);
             }
-            if(test.hasClass('editable-vid')){
+            if(hasMedia.hasClass('editable-vid')){
                 $(this).find('img').last().parent().before(vidEditBtn);
             }
-            if(hasText.hasClass('editable-text')){
+            if(hasText.hasClass('editable-text')) {
                 $(this).find('.editable-text').before(txtEditBtn);
             }
         }
@@ -125,9 +126,10 @@ $(document).ready(function() {
 
     // endable sortable, update index on reorder
     $( ".sortable" ).sortable({
-        stop: updateIndex
+        stop: updateIndex,
+        cancel: '.edit-popup,button',
+        distance: 100
     })
-        .disableSelection()
         // indexation des blocs
         .on("click", ".remove-button", function() {
             $(this).parent().remove();
@@ -160,21 +162,41 @@ $(document).ready(function() {
         // add text edit popup
         .on('click', ".edit-txt__button", function() {
             $(this).parent().prepend(txtEditPopup);
-            var text = $(this).closest('td').find(".editable-text");
-            var content = $(this).parent().find('.txt');
-            content.attr('value',text.html());
+            $(this).closest('td').find('.editable-text').addClass('current-editing');
+            var text = $(this).closest('td').find(".editable-text").html();
+            var popup = $(this).closest('.preview-zone');
+            var content = $(popup).find('.txt');
+            $(content).html(text);
         })
 
-        .on('click', '.edit-popup .the-button', function() {
+        .on('click','.style-bold', function() {
+            document.execCommand('bold');
+        })
 
+        .on('click','.style-italic', function() {
+            document.execCommand('italic');
+        })
+
+        // txt update button
+        .on('click', '.edit-popup .the-text-btn', function() {
+            var content = $(this).closest('td').find('.current-editing');
+            var txt = $(this).parent().find('.txt');
+
+            if(txt!==''){
+                $(content).html($(txt).html());
+            }
+            $(this).closest('.edit-popup').remove();
+        })
+
+        // custom edition popup validate button
+        .on('click', '.edit-popup .the-button', function() {
             var img = $(this).closest('td').find("img");
-            var a = img.parent();
-            var text = $(this).closest('td').find(".editable-text");
+            var anchor = img.parent();
 
             var src = $(this).parent().find('.src').val();
             var alt = $(this).parent().find('.alt').val();
             var href = $(this).parent().find('.vidUrl').val();
-            var content = $(this).parent().find('.txt').val();
+
 
             if(src!==''){
                 img.attr('src',src);
@@ -183,10 +205,7 @@ $(document).ready(function() {
                 img.attr('alt',alt);
             }
             if(href!==''){
-                a.attr('href',href);
-            }
-            if(content!==''){
-                text.text(content);
+                anchor.attr('href',href);
             }
             $(this).closest('.edit-popup').remove();
         });

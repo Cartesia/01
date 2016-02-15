@@ -5,8 +5,8 @@
 {% block nav%}
     <ul class="nav navbar-nav" role="tablist">
         {% for brand in brands %}
-            <li class="active">
-                <a href="#">{{ brand.name }}<span class="sr-only">(current)</span></a>
+            <li>
+                <a href="#">{{ brand.name }}</a>
             </li>
         {% endfor %}
     </ul>
