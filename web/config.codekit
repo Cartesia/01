@@ -58,6 +58,17 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/images\/admin\/default_avatar.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 2449,
+		"inputAbbreviatedPath": "\/images\/admin\/default_avatar.png",
+		"outputAbbreviatedPath": "\/images\/admin\/default_avatar.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/js\/bootstrap-editable.min.js": {
 		"fileType": 64,
 		"ignore": 0,

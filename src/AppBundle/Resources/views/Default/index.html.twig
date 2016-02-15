@@ -8,9 +8,10 @@
 {% endblock %}
 
 {% block nav %}
-    {% for brand in brands %}
+    {% for key, brand in brands %}
+        {% set active = (key == 0) ? 'active' : '' %}
         <ul class="nav navbar-nav" role="tablist">
-            <li>
+            <li class="{{ active }}">
                 <a href="#">{{ brand.name }}<span class="sr-only">(current)</span></a>
             </li>
         </ul>
@@ -49,8 +50,8 @@
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
                                 {% for key, bloc in t.blocs %}
-                                    {% set classe = (key == 0) ? 'class="active"' : '' %}
-                                    <li role="presentation" {{ classe }}>
+                                    {% set active = (key == 0) ? 'active' : '' %}
+                                    <li role="presentation" class="{{ active }}">
                                         <a href="#alternative-{{ bloc.id }}" aria-controls="alternative-{{ bloc.title }}" role="tab" data-toggle="tab" aria-expanded="true">{{ bloc.title }}</a>
                                     </li>
                                 {% endfor %}
@@ -59,8 +60,8 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             {% for key, bloc in t.blocs %}
-                                {% set classe = (key == 0) ? ' active' : '' %}
-                                <div role="tabpanel" class="tab-pane{{ classe }}" id="alternative-{{ bloc.id }}">
+                                {% set classe = (key == 0) ? 'active' : '' %}
+                                <div role="tabpanel" class="tab-pane {{ classe }}" id="alternative-{{ bloc.id }}">
                                     <div class="n-example">
                                         <p> Exemple </p>
                                         <table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #ffffff !important; font-family: Arial, Helvetica, Geneva, sans-serif;">

@@ -4,9 +4,10 @@
 
 {% block nav%}
     <ul class="nav navbar-nav" role="tablist">
-        {% for brand in brands %}
-            <li>
-                <a href="#">{{ brand.name }}</a>
+        {% for key, brand in brands %}
+            {% set active = (key == 0) ? 'active' : '' %}
+            <li class="{{ active }}">
+                <a href="#">{{ brand.name }}<span class="sr-only">(current)</span></a>
             </li>
         {% endfor %}
     </ul>
@@ -24,6 +25,7 @@
     </ul>
 {% endblock %}
 
+
 {% block body %}
     <!-- GLOBAL CONTAINER FOR EDITOR PAGE -->
     <div class="container editor">
@@ -35,9 +37,11 @@
                         <h4>Prévisualisation</h4>
                     </div>
                     <div class="col-xs-6 text-right">
-                        <button type="button" class="btn btn-primary" id="downloadLink" data-blocks="{{ path('api_bloc') }}">
-                            <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Télécharger
-                        </button>
+                        <a href="#" id="downloadLink" data-blocks="{{ path('api_bloc') }}">
+                            <button type="button" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Télécharger
+                            </button>
+                        </a>
                     </div>
                 </div>
                 <div class="preview-zone col-xs-12">

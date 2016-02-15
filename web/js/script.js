@@ -26,6 +26,12 @@ $(document).ready(function() {
             type : 'text',
             title : 'Modifier titre'
         });
+
+        $('#comments').editable({
+            url: '/post',
+            title: 'Enter comments'
+        });
+
         $('.editable-url').editable({
             url: '/post',
             type: 'text',
