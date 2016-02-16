@@ -13,10 +13,10 @@ class BlocAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('content')
-            ->add('title', null, array('required' => false))
+            ->add('content', null, array('label' => 'Contenu'))
+            ->add('title', null, array('required' => false, 'label' => 'Nom de la Variante'))
             ->add('template')
-            ->add('editor')
+            ->add('editable')
         ;
     }
     // Fields to be shown on filter forms
@@ -32,7 +32,7 @@ class BlocAdmin extends Admin
         $listMapper
             ->add('template')
             ->add('title')
-            ->add('editor')
+            ->add('editable')
             ->add('_action', 'actions', [
                 'actions' => [
                     'show'   => [],
@@ -48,7 +48,8 @@ class BlocAdmin extends Admin
             ->add('content')
             ->add('title')
             ->add('template')
-            ->add('editor')
+            ->add('editable')
         ;
     }
+
 }

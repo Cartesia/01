@@ -27,9 +27,10 @@ $(document).ready(function() {
             title : 'Modifier titre'
         });
 
-        $('#comments').editable({
-            url: '/post',
-            title: 'Enter comments'
+        $('.editable-text').editable({
+            url : '/post',
+            type : 'textarea',
+            title : 'Modifier le texte'
         });
 
         $('.editable-url').editable({
@@ -44,6 +45,7 @@ $(document).ready(function() {
                 $(this).attr('href', newValue);
             }
         });
+
         $('.editable-month').editable({
             url: '/post',
             type: 'select',
@@ -64,6 +66,7 @@ $(document).ready(function() {
 
             ]
         });
+
         $('.editable-day').editable({
             url: '/post',
             format: 'dd',
@@ -72,6 +75,7 @@ $(document).ready(function() {
                 weekStart: 1
             }
         });
+
         $('.editable-week').editable({
             url: '/post',
             type: 'select',
@@ -87,6 +91,7 @@ $(document).ready(function() {
 
             ]
         });
+
         $('.editable-hours').editable({
             url: '/post',
             format: 'hh:ii',
@@ -96,7 +101,6 @@ $(document).ready(function() {
             }
         });
     }
-
 
     // enable DnD of block elements
     $(".block-draggable").draggable({
@@ -123,9 +127,9 @@ $(document).ready(function() {
             if(test.hasClass('editable-vid')){
                 $(this).find('img').last().parent().before(vidEditBtn);
             }
-            if(hasText.hasClass('editable-text')){
+/*            if(hasText.hasClass('editable-text')){
                 $(this).find('.editable-text').before(txtEditBtn);
-            }
+            }*/
         }
     });
 
@@ -164,12 +168,12 @@ $(document).ready(function() {
         })
 
         // add text edit popup
-        .on('click', ".edit-txt__button", function() {
+/*        .on('click', ".edit-txt__button", function() {
             $(this).parent().prepend(txtEditPopup);
             var text = $(this).closest('td').find(".editable-text");
             var content = $(this).parent().find('.txt');
             content.attr('value',text.html());
-        })
+        })*/
 
         .on('click', '.edit-popup .the-button', function() {
 
@@ -191,9 +195,9 @@ $(document).ready(function() {
             if(href!==''){
                 a.attr('href',href);
             }
-            if(content!==''){
+/*            if(content!==''){
                 text.text(content);
-            }
+            }*/
             $(this).closest('.edit-popup').remove();
         });
 
@@ -207,7 +211,7 @@ $(document).ready(function() {
     function openWithPostData(page,data)
     {
         var form = document.createElement('form'); // create a form
-        form.setAttribute('action', page); // set the action to 'ApiController.php'
+        form.setAttribute('action', page); // set the action to 'DownloadController.php'
         form.setAttribute('method', 'post'); // set method to post
         form.setAttribute('target', '_blanck'); // set method to post
         for (n in data){

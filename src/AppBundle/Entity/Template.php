@@ -31,16 +31,23 @@ class Template
     /**
      * @var string
      *
-     * @ORM\Column(name="subtitle", type="string", length=255)
+     * @ORM\Column(name="connection", type="string", length=255)
      */
-    private $subtitle;
+    private $connection;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
 
     /**
      * @var string
      *
      * @ORM\Column(name="slug", type="string", length=255)
      */
-    private $href;
+    private $slug;
 
     /**
      * @ORM\OneToMany(targetEntity="Bloc", mappedBy="template")
@@ -96,49 +103,72 @@ class Template
     }
 
     /**
-     * Set subtitle
+     * Set connection
      *
-     * @param string $subtitle
+     * @param string $connection
      * @return Template
      */
-    public function setSubtitle($subtitle)
+    public function setConnection($connection)
     {
-        $this->subtitle = $subtitle;
+        $this->connection = $connection;
 
         return $this;
     }
 
     /**
-     * Get subtitle
+     * Get connection
      *
-     * @return string 
+     * @return string
      */
-    public function getSubtitle()
+    public function getConnection()
     {
-        return $this->subtitle;
+        return $this->connection;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Template
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**
      * Set href
      *
-     * @param string $href
+     * @param string $slug
      * @return Template
      */
-    public function setHref($href)
+    public function setSlug($slug)
     {
-        $this->href = $href;
+        $this->slug = $slug;
 
         return $this;
     }
 
     /**
-     * Get href
+     * Get slug
      *
      * @return string 
      */
-    public function getHref()
+    public function getSlug()
     {
-        return $this->href;
+        return $this->slug;
     }
 
     /**
@@ -212,6 +242,8 @@ class Template
      */
     public function __toString()
     {
-        return $this->title;
+        return $this->title.' - '.$this->connection;
     }
+
+
 }

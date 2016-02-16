@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 
-class ApiController extends Controller
+class DownloadController extends Controller
 {
     public function blocAction(Request $request)
     {

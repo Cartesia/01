@@ -24,7 +24,7 @@ class Bloc
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="text")
+     * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
@@ -36,9 +36,9 @@ class Bloc
     private $content;
 
     /**
-     * @ORM\Column(name="editor", type="boolean")
+     * @ORM\Column(name="editable", type="boolean")
      */
-    private $editor;
+    private $editable;
 
     /**
      * @ORM\ManyToOne(targetEntity="Template", inversedBy="blocs")
@@ -119,24 +119,24 @@ class Bloc
     /**
      * Set editor
      *
-     * @param boolean $editor
+     * @param boolean $editable
      * @return Bloc
      */
-    public function setEditor($editor)
+    public function setEditable($editable)
     {
-        $this->editor = $editor;
+        $this->editable = $editable;
 
         return $this;
     }
 
     /**
-     * Get editor
+     * Get editable
      *
      * @return boolean 
      */
-    public function getEditor()
+    public function getEditable()
     {
-        return $this->editor;
+        return $this->editable;
     }
 
     /**
@@ -194,6 +194,14 @@ class Bloc
     public function getNewsbloc()
     {
         return $this->newsbloc;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->content;
     }
 
 }

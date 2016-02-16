@@ -2,9 +2,9 @@ documentation:
     resource: "documentation/routing.yml"
     prefix: /documentation
 
-api:
-    resource: "api/routing.yml"
-    prefix: /api
+download:
+    resource: "download/routing.yml"
+    prefix: /download
 
 editor:
     resource: "editor/routing.yml"

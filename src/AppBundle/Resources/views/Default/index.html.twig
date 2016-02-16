@@ -24,10 +24,10 @@
             <div class="col-md-9" role="main">
                 {% for t in arrayTemplates %}
                     {% if t.blocs|length == 1 %}
-                        <div id="{{ t.template.href }}">
+                        <div id="{{ t.template.slug }}">
                             <h2>{{ t.template.title }}</h2>
-                            <p>{{ t.template.subtitle }}</p>
-                            <div class="n-example">
+                            <p>{{ t.template.description }}</p>
+                            <div class="block-example">
                                 <p> Exemple </p>
                                 <table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #ffffff !important; font-family: Arial, Helvetica, Geneva, sans-serif;">
                                     <tbody>
@@ -44,9 +44,9 @@
                             </figure>
                         </div>
                     {% else %}
-                        <div id="{{ t.template.href }}" class="nav-events">
+                        <div id="{{ t.template.slug }}">
                             <h2>{{ t.template.title }}</h2>
-                            <p>{{ t.template.subtitle }}</p>
+                            <p>{{ t.template.description }}</p>
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
                                 {% for key, bloc in t.blocs %}
@@ -86,13 +86,13 @@
 
             <div class="col-md-3" role="navigation" >
                 <nav class="nav affix-top" id="navbar-right">
-                    {% for t in arrayTemplates %}
                     <ul class="nav nav-pills nav-stacked" role="tablist">
-                        <li>
-                            <a href="#{{ t.template.href }}">{{ t.template.title }}</a>
-                        </li>
+                        {% for t in arrayTemplates %}
+                            <li>
+                                <a href="#{{ t.template.slug }}">{{ t.template.title }}</a>
+                            </li>
+                        {% endfor %}
                     </ul>
-                    {% endfor %}
                     <a class="back-to-top" href="#top"> Back to top </a>
                 </nav>
             </div>

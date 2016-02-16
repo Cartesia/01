@@ -1,18 +1,32 @@
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+
+sonata_admin:
+    templates:
+        #layout:   SonataAdminBundle::standard_layout.html.twig
+        layout:    AppBundle:Backend:_layout.html.twig
+    title: 'Newsletters'
+
+
 services:
     sonata.admin.brand:
         class: AppBundle\Admin\BrandAdmin
         arguments: [ ~, AppBundle\Entity\Brand, ~ ]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Doc-Editor", label: "Brand" }
+            - { name: sonata.admin, manager_type: orm, group: "Cartesia", label: "Marques" }
 
     sonata.admin.template:
         class: AppBundle\Admin\TemplateAdmin
         arguments: [ ~, AppBundle\Entity\Template, ~ ]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Doc-Editor", label: "Template" }
+            - { name: sonata.admin, manager_type: orm, group: "Cartesia", label: "Modèle Template" }
 
     sonata.admin.bloc:
         class: AppBundle\Admin\BlocAdmin
         arguments: [ ~, AppBundle\Entity\Bloc, ~ ]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Doc-Editor", label: "Bloc" }
+            - { name: sonata.admin, manager_type: orm, group: "Cartesia", label: "Modèle Bloc" }

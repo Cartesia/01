@@ -31,9 +31,16 @@ class Template
     /**
      * @var string
      *
-     * @ORM\Column(name="subtitle", type="string", length=255)
+     * @ORM\Column(name="connection", type="string", length=255)
      */
-    private $subtitle;
+    private $connection;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
 
     /**
      * @var string
@@ -93,29 +100,6 @@ class Template
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set subtitle
-     *
-     * @param string $subtitle
-     * @return Template
-     */
-    public function setSubtitle($subtitle)
-    {
-        $this->subtitle = $subtitle;
-
-        return $this;
-    }
-
-    /**
-     * Get subtitle
-     *
-     * @return string 
-     */
-    public function getSubtitle()
-    {
-        return $this->subtitle;
     }
 
     /**
@@ -205,5 +189,13 @@ class Template
     public function getBrands()
     {
         return $this->brands;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->title.'-'.$this->connection;
     }
 }

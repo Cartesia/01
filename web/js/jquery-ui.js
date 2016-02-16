@@ -22,7 +22,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/category/ui-core/
+     * http://download.jqueryui.com/category/ui-core/
      */
 
 
@@ -316,7 +316,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/jQuery.widget/
+     * http://download.jqueryui.com/jQuery.widget/
      */
 
 
@@ -864,7 +864,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/mouse/
+     * http://download.jqueryui.com/mouse/
      */
 
 
@@ -1050,7 +1050,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/position/
+     * http://download.jqueryui.com/position/
      */
 
     (function() {
@@ -1557,7 +1557,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/accordion/
+     * http://download.jqueryui.com/accordion/
      */
 
 
@@ -2133,7 +2133,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/menu/
+     * http://download.jqueryui.com/menu/
      */
 
 
@@ -2764,7 +2764,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/autocomplete/
+     * http://download.jqueryui.com/autocomplete/
      */
 
 
@@ -3376,7 +3376,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/button/
+     * http://download.jqueryui.com/button/
      */
 
 
@@ -3773,7 +3773,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/datepicker/
+     * http://download.jqueryui.com/datepicker/
      */
 
 
@@ -5844,7 +5844,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/draggable/
+     * http://download.jqueryui.com/draggable/
      */
 
 
@@ -6961,7 +6961,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/resizable/
+     * http://download.jqueryui.com/resizable/
      */
 
 
@@ -8098,7 +8098,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/dialog/
+     * http://download.jqueryui.com/dialog/
      */
 
 
@@ -8955,7 +8955,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/droppable/
+     * http://download.jqueryui.com/droppable/
      */
 
 
@@ -9352,7 +9352,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/category/effects-core/
+     * http://download.jqueryui.com/category/effects-core/
      */
 
 
@@ -10643,7 +10643,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/blind-effect/
+     * http://download.jqueryui.com/blind-effect/
      */
 
 
@@ -10720,7 +10720,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/bounce-effect/
+     * http://download.jqueryui.com/bounce-effect/
      */
 
 
@@ -10830,7 +10830,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/clip-effect/
+     * http://download.jqueryui.com/clip-effect/
      */
 
 
@@ -10894,7 +10894,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/drop-effect/
+     * http://download.jqueryui.com/drop-effect/
      */
 
 
@@ -10956,7 +10956,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/explode-effect/
+     * http://download.jqueryui.com/explode-effect/
      */
 
 
@@ -11050,7 +11050,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/fade-effect/
+     * http://download.jqueryui.com/fade-effect/
      */
 
 
@@ -11077,7 +11077,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/fold-effect/
+     * http://download.jqueryui.com/fold-effect/
      */
 
 
@@ -11150,7 +11150,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/highlight-effect/
+     * http://download.jqueryui.com/highlight-effect/
      */
 
 
@@ -11197,7 +11197,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/size-effect/
+     * http://download.jqueryui.com/size-effect/
      */
 
 
@@ -11417,7 +11417,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/scale-effect/
+     * http://download.jqueryui.com/scale-effect/
      */
 
 
@@ -11492,7 +11492,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/puff-effect/
+     * http://download.jqueryui.com/puff-effect/
      */
 
 
@@ -11538,7 +11538,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/pulsate-effect/
+     * http://download.jqueryui.com/pulsate-effect/
      */
 
 
@@ -11598,7 +11598,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/shake-effect/
+     * http://download.jqueryui.com/shake-effect/
      */
 
 
@@ -11669,7 +11669,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/slide-effect/
+     * http://download.jqueryui.com/slide-effect/
      */
 
 
@@ -11730,7 +11730,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/transfer-effect/
+     * http://download.jqueryui.com/transfer-effect/
      */
 
 
@@ -11774,7 +11774,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/progressbar/
+     * http://download.jqueryui.com/progressbar/
      */
 
 
@@ -11919,7 +11919,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/selectable/
+     * http://download.jqueryui.com/selectable/
      */
 
 
@@ -12191,7 +12191,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/selectmenu
+     * http://download.jqueryui.com/selectmenu
      */
 
 
@@ -12790,7 +12790,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/slider/
+     * http://download.jqueryui.com/slider/
      */
 
 
@@ -13492,7 +13492,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/sortable/
+     * http://download.jqueryui.com/sortable/
      */
 
 
@@ -14792,7 +14792,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/spinner/
+     * http://download.jqueryui.com/spinner/
      */
 
 
@@ -15291,7 +15291,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/tabs/
+     * http://download.jqueryui.com/tabs/
      */
 
 
@@ -16163,7 +16163,7 @@
      * Released under the MIT license.
      * http://jquery.org/license
      *
-     * http://api.jqueryui.com/tooltip/
+     * http://download.jqueryui.com/tooltip/
      */
 
 

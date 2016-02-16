@@ -1,0 +1,3 @@
+api_bloc:
+    path: "/"
+    defaults: {_controller: AppBundle:Download:bloc }

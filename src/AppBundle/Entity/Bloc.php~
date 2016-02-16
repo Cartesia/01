@@ -139,6 +139,29 @@ class Bloc
         return $this->editor;
     }
 
+    /**
+     * Set template
+     *
+     * @param \AppBundle\Entity\Template $template
+     * @return Bloc
+     */
+    public function setTemplate(\AppBundle\Entity\Template $template)
+    {
+        $this->template = $template;
+
+        return $this;
+    }
+
+    /**
+     * Get template
+     *
+     * @return \AppBundle\Entity\Template
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+
    
     /**
      * Add newsbloc
@@ -172,4 +195,5 @@ class Bloc
     {
         return $this->newsbloc;
     }
+
 }

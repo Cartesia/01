@@ -1,3 +1,0 @@
-api_bloc:
-    path: "/"
-    defaults: {_controller: AppBundle:Api:bloc }

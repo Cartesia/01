@@ -75,7 +75,7 @@
                 </div>
                 <div class="blocks-list">
                     {% for t in arrayTemplates %}
-                        {% if t.blocs[0].editor == true %}
+                        {% if t.blocs[0].editable == true %}
                             {% if t.blocs|length != 1 %}
                                 <div class="dropdown">
                                     <button class="btn btn-primary dropdown-toggle block-btn" id="{{ t.template.title }}" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
