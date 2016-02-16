@@ -13,28 +13,23 @@ class BrandAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name')
-            ->add('slug')
-            ->add('templates')
+            ->with('Marque')
+                ->add('name', null, array('label' => 'Nom'))
+                ->add('slug')
+            ->end()
         ;
     }
-    // Fields to be shown on filter forms
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-        $datagridMapper
-            ->add('name')
-        ;
-    }
+
     // Fields to be shown on lists
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('name')
-            ->add('slug')
+            ->add('name', null, array('label' => 'Nom'))
             ->add('_action', 'actions', [
                 'actions' => [
                     'show'   => [],
                     'edit'   => [],
+                    'delete' => []
                 ],
             ])
         ;
@@ -43,9 +38,11 @@ class BrandAdmin extends Admin
     {
         // Fields to be shown on show action
         $showMapper
-            ->add('name')
-            ->add('slug')
-            ->add('templates')
+            ->with('Marque')
+                ->add('name', null, array('label' => 'Nom'))
+                ->add('slug')
+                ->add('templates', null, array('label' => 'Liste des templates'))
+            ->end()
         ;
     }
 }

@@ -201,7 +201,7 @@ class Bloc
      */
     public function __toString()
     {
-        return $this->content;
+        return $this->title;
     }
 
 }

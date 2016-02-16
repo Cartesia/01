@@ -31,13 +31,6 @@ class Template
     /**
      * @var string
      *
-     * @ORM\Column(name="connection", type="string", length=255)
-     */
-    private $connection;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="description", type="text")
      */
     private $description;
@@ -50,12 +43,12 @@ class Template
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="Bloc", mappedBy="template")
+     * @ORM\OneToMany(targetEntity="Bloc", mappedBy="template", cascade={"persist", "remove"})
      */
     private $blocs;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Brand", mappedBy="templates")
+     * @ORM\ManyToMany(targetEntity="Brand", mappedBy="templates", cascade={"persist"})
      */
     private $brands;
 
@@ -100,29 +93,6 @@ class Template
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set connection
-     *
-     * @param string $connection
-     * @return Template
-     */
-    public function setConnection($connection)
-    {
-        $this->connection = $connection;
-
-        return $this;
-    }
-
-    /**
-     * Get connection
-     *
-     * @return string
-     */
-    public function getConnection()
-    {
-        return $this->connection;
     }
 
     /**
@@ -213,7 +183,7 @@ class Template
     public function addBrand(\AppBundle\Entity\Brand $brands)
     {
         $this->brands[] = $brands;
-
+        $brands->addTemplate($this);
         return $this;
     }
 
@@ -225,6 +195,7 @@ class Template
     public function removeBrand(\AppBundle\Entity\Brand $brands)
     {
         $this->brands->removeElement($brands);
+        $brands->removeTemplate($this);
     }
 
     /**
@@ -242,7 +213,7 @@ class Template
      */
     public function __toString()
     {
-        return $this->title.' - '.$this->connection;
+        return $this->title;
     }
 
 

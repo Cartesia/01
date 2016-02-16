@@ -31,25 +31,19 @@
  * CONTENT
  *
  */
-.n-example {
+.block-example {
   position: relative;
   padding: 20px 50px 15px;
-  background-color: #fff;
-  border-color: #ddd;
-  border-width: 1px 1px;
-  border-style: solid;
+  background-color: @white;
+  border: 1px solid @light-grey;
   border-radius: 4px 4px 0 0;
   box-shadow: none;
 }
 
-.n-example p {
-  color: #c0c0c0;
+.block-example p {
+  color: @light-grey;
   font-weight: bold;
   text-transform: uppercase;
-}
-
-.nav-events {
-  margin-top: 20px;
 }
 
 /*
@@ -73,7 +67,7 @@
 
 
 .preview-zone {
-  border: 1px solid dimgrey;
+  border: 1px solid @grey;
   min-height: 70vh;
 }
 
@@ -88,7 +82,7 @@
   padding: 0 0 10vh 0;
   margin-top: 2vh;
   li {
-    border: 1px dotted black;
+    border: 1px dotted @pitch-black;
     margin: 5px 0;
     background-color: @white;
     list-style: none;
@@ -103,6 +97,9 @@
   padding: 3vh 2vw;
   .nav{
     width: 100%;
+  }
+  h4{
+    margin-left: 15px;
   }
 }
 
@@ -124,8 +121,11 @@
   float: right;
   top: 2px;
   right: 2px;
+  width: 25px;
+  height: 25px;
   background-color: fade(@black,50%);
-  color: white;
+  color: @white;
+  line-height: 1px;
 }
 
 /*
@@ -147,53 +147,14 @@
 .popover {
   max-width: 100vw;
   textarea.form-control {
-    width: 500px;
+    .rem(width, 500px);
     max-width: 100vw;
   }
 }
 
-.edit-img__button {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  font-size: 16px;
-  color: @white;
-  background-color: fade(@black, 50%);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  &:hover {
-    opacity: 1;
-  }
-}
-
-.edit-vid__button {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  font-size: 16px;
-  color: @white;
-  background-color: fade(@black, 50%);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  &:hover {
-    opacity: 1;
-  }
-}
-
-.edit-txt__button {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  font-size: 16px;
+.edit-img__button, .edit-vid__button {
+  .abs-btn;
+  .rem(font-size, 16px);
   color: @white;
   background-color: fade(@black, 50%);
   opacity: 0;
@@ -204,8 +165,8 @@
 }
 
 .edit-popup {
-  z-index: 1000;
-  font-size: 14px;
+  z-index: 999;
+  .rem(font-size, 14px);
   font-style: normal;
   font-weight: 400;
   line-height: 1.42857143;
@@ -225,32 +186,34 @@
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
   border-radius: 6px;
-  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  -webkit-box-shadow: 0 5px 10px fade(@black, 20%);
+  box-shadow: 0 5px 10px fade(@black, 20%);
   line-break: auto;
-  border: 1px solid rgba(0,0,0,.2);
+  border: 1px solid fade(@black, 20%);
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   input {
-    margin: 1px auto;
-    width: 500px;
+    margin: 2px 0 5px 0;
+    .rem(width, 500px);
     border-radius: 4px;
-    border: 1px solid #ccc;
+    border: 1px solid @light-grey;
     font-size: 14px;
     padding: 5px;
+    display: block;
+
   }
 }
 
 .edit-popup__title {
   padding: 8px 14px;
   margin: 0;
-  font-size: 14px;
+  .rem(font-size, 14px);
   background-color: #f7f7f7;
   border-bottom: 1px solid #ebebeb;
   border-radius: 5px 5px 0 0;
 }
 
 .edit-popup__content {
-  padding: 10px;
+  .rem(padding, 10px);
 }
 
 .block-wrapper {
@@ -259,20 +222,23 @@
   }
 }
 
-.the-button {
+.validate-btn {
   border-radius: 3px;
-  background-image: none;
   border: 1px solid transparent;
   white-space: nowrap;
   vertical-align: middle;
   font-weight: 600;
+  font-size: 12px;
+  padding: 5px 12px;
+  &:hover {
+    background-color: @hover-blue;
+  }
 }
 
-
-
-
-
-
-
-
-
+.edited-txt {
+  .rem(width, 500px);
+  border-radius: 4px;
+  border: 1px solid @light-grey;
+  .rem(font-size, 14px);
+  padding: 5px;
+}

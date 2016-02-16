@@ -10,6 +10,14 @@ sonata_admin:
         #layout:   SonataAdminBundle::standard_layout.html.twig
         layout:    AppBundle:Backend:_layout.html.twig
     title: 'Newsletters'
+    dashboard:
+        groups:
+            cartesia:
+                label:                "Cartesia"
+                items:
+                    - sonata.admin.brand
+                    - sonata.admin.template
+
 
 
 services:
@@ -17,11 +25,11 @@ services:
         class: AppBundle\Admin\BrandAdmin
         arguments: [ ~, AppBundle\Entity\Brand, ~ ]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Cartesia", label: "Marques" }
+            - { name: sonata.admin, manager_type: orm, group: "Cartesia", label: "Marque" }
 
     sonata.admin.template:
         class: AppBundle\Admin\TemplateAdmin
-        arguments: [ ~, AppBundle\Entity\Template, ~ ]
+        arguments: [ ~, AppBundle\Entity\Template, AppBundle:Template ]
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Cartesia", label: "Modèle Template" }
 

@@ -13,8 +13,8 @@ class BlocAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('content', null, array('label' => 'Contenu'))
-            ->add('title', null, array('required' => false, 'label' => 'Nom de la Variante'))
+            ->add('content', null, array('label' => 'Code HTML'))
+            ->add('title', null, array('label' => 'Nom de la variante', 'required' => false))
             ->add('template')
             ->add('editable')
         ;
