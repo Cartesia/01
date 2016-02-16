@@ -1,48 +1,43 @@
 $(document).ready(function() {
 
-    // "remove-button" node
+    // Custom VAR for DOM appends
+    //remove button on popup edits
     var rmvBtn = "<button class='remove-button'>x</button>";
-
+    //buttons appended on img(s) and video(s) to trigger edit-popup(s)
     var imgEditBtn = "<button class='edit-img__button'>Editer image</button>";
     var vidEditBtn = "<button class='edit-vid__button'>Editer video</button>";
-
-
+    //custom edit-popup(s) for img(s)/video(s) and editable text(s)
     var imgEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier l\'image</h3><div class="edit-popup__content">Source:<input type="text" class="src" placeholder="Lien vers l\'image" value="">Description:<input type="text" class="alt" placeholder="Description de l\'image" value=""><button class="validate-btn btn-primary">Valider</button></div></div>';
     var vidEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier la vidéo</h3><div class="edit-popup__content">Source:<input type="text" class="src" placeholder="Lien vers l\'image" value="">Description:<input type="text" class="alt" placeholder="Description de l\'image" value="">Lien vers la vidéo:<input type="text" class="vidUrl" placeholder="Lien vers la vidéo" value=""><br><button class="validate-btn btn-primary">Valider</button></div></div>';
     var txtEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier le texte</h3><div class="edit-popup__content"><button type="button" class="btn btn-default btn-sm style-bold"><span class="glyphicon glyphicon-bold" aria-hidden="true"></span> Bold </button><button type="button" class="btn btn-default btn-sm style-italic"><span class="glyphicon glyphicon-italic" aria-hidden="true"></span> Italic </button><div class="edited-txt" contenteditable></div><button class="validate-btn the-text-btn btn-primary">Valider</button></div></div>';
 
-    // function to update index on sortable
-    function updateIndex() {
-        var items = $('.sortable').find('li');
-        items.each(function(i) {
-            $(this).attr('data-order',i + 1);
-        });
-    }
-
+    // function called on block 'drop' (cf: droppable)
     function editablePrompt() {
+        //enable editable for title(s)
         $('.editable-title').editable({
             url : '/post',
             type : 'text',
             title : 'Modifier titre'
         });
-
+        //enable editable for comment(s)
         $('#comments').editable({
             url: '/post',
             title: 'Enter comments'
         });
-
+        //enablt editable for url(s)
         $('.editable-url').editable({
             url: '/post',
             type: 'text',
             title: 'Modifier l\'url',
             value: '',
             display: function(value, response) {
-                return false;   //disable this method for x reasons I can't recall
+                return false;
             },
             success: function(response, newValue){
                 $(this).attr('href', newValue);
             }
         });
+        //enable editable for month(s)
         $('.editable-month').editable({
             url: '/post',
             type: 'select',
@@ -63,6 +58,7 @@ $(document).ready(function() {
 
             ]
         });
+        //enable editable for day(s)
         $('.editable-day').editable({
             url: '/post',
             format: 'dd',
@@ -71,6 +67,7 @@ $(document).ready(function() {
                 weekStart: 1
             }
         });
+        //enable editable for week(s)
         $('.editable-week').editable({
             url: '/post',
             type: 'select',
@@ -86,6 +83,7 @@ $(document).ready(function() {
 
             ]
         });
+        //enable editable for hour(s)
         $('.editable-hours').editable({
             url: '/post',
             format: 'hh:ii',
@@ -97,26 +95,24 @@ $(document).ready(function() {
     }
 
 
-    // enable DnD of block elements
+    // enable 'Drag' of block elements
     $(".block-draggable").draggable({
         cancel : '.edit-popup',
         helper :'clone',
         distance : 100
     });
 
-    // enable droppable zone
+    // enable 'Droppable'on preview-zone for the 'draggable' elements
     $(".preview-zone__sortable").droppable({
-        accept : ".block-draggable",
+        accept : ".block-draggable", //specify which blocs can be appended to this drop zone
         drop : function(event,ui) {
             console.log("Item was Dropped");
             $(this).append($(ui.draggable).clone().data('html'));
-            editablePrompt();
+            editablePrompt();//launch .editable fn when an el is dropped
             var n = $('.preview-zone__sortable li').size();
             $(this).find("li").last().attr('data-order',n)
                 .prepend(rmvBtn);
-
             var hasMedia = $(this).find("img").last();
-            var hasText = $(this).find('.editable-text').last();
             if(hasMedia.hasClass('editable-src')){
                 $(this).find("img").last().parent().before(imgEditBtn);
             }
@@ -126,18 +122,26 @@ $(document).ready(function() {
         }
     });
 
+    // function to update index on sortable
+    function updateIndex() {
+        var items = $('.sortable').find('li');
+        items.each(function(i) {
+            $(this).attr('data-order',i + 1);
+        });
+    }
+
     // endable sortable, update index on reorder
     $( ".sortable" ).sortable({
-        stop: updateIndex,
-        cancel: '.edit-popup,button,.popover',
-        distance: 100
+        stop: updateIndex, // launch update index each time an el is sorted to re-number them
+        cancel: '.edit-popup,button,.popover', // prevent 'sortable' from working on these el
+        distance: 100 //minimum distance (in px) before 'sortable' starts working
     })
         // indexation des blocs
         .on("click", ".remove-button", function() {
             $(this).parent().remove();
             updateIndex();
         })
-        // add img edit popup
+        // add custom img-edit popup
         .on('click', ".edit-img__button", function() {
             $(this).parent().prepend(imgEditPopup);
             var img = $(this).closest('td').find("img");
@@ -145,9 +149,10 @@ $(document).ready(function() {
             var alt = $(this).parent().find('.alt');
             src.attr('value', img.attr('src'));
             alt.attr('value', img.attr('alt'));
+            alert('lol');
         })
 
-        // add vid edit popup
+        // add custom vid-edit popup
         .on('click', ".edit-vid__button", function() {
             $(this).parent().prepend(vidEditPopup);
             var img = $(this).closest('td').find("img");
@@ -161,7 +166,7 @@ $(document).ready(function() {
             href.attr('value', a.attr('href'));
         })
 
-        // add text edit popup
+        // add custom text-edit popup
         .on('click', ".editable-text", function() {
             console.log(this);
             $(this).parent().prepend(txtEditPopup);
@@ -174,11 +179,11 @@ $(document).ready(function() {
         })
 
         .on('click','.style-bold', function() {
-            document.execCommand('bold');
+            document.execCommand('bold'); // bolden selection
         })
 
         .on('click','.style-italic', function() {
-            document.execCommand('italic');
+            document.execCommand('italic'); // italisize selection
         })
 
         // txt update button
@@ -201,7 +206,6 @@ $(document).ready(function() {
             var alt = $(this).parent().find('.alt').val();
             var href = $(this).parent().find('.vidUrl').val();
 
-
             if(src!==''){
                 img.attr('src',src);
             }
@@ -215,12 +219,12 @@ $(document).ready(function() {
         });
 
 
-    // prevent redirection when trying to edit anchor tags
+    // PREVENT REDIRECTION ON ANCHOR TAGS
     $(".preview-zone__sortable").on('click', 'a', function(e) {
         e.preventDefault();
     });
 
-    // function to send data in POST
+    // FUNCTION TO SEND REQUIRED DATA BY POST
     function openWithPostData(page,data)
     {
         var form = document.createElement('form'); // create a form
@@ -238,7 +242,7 @@ $(document).ready(function() {
         form.submit(); // submit
     }
 
-    // function to trim final content and POST to ApiController.
+    // FUNCTION TO TRIM CONTENT and POST to ApiController.
     $('#downloadLink').on('click', function(e) {
         e.preventDefault();
 
