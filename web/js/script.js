@@ -7,9 +7,9 @@ $(document).ready(function() {
     var vidEditBtn = "<button class='edit-vid__button'>Editer video</button>";
 
 
-    var imgEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier l\'image</h3><div class="edit-popup__content">Source: <br><input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>Description: <br><input type="text" class="alt" placeholder="Description de l\'image" value=""><br><button class="the-button btn-primary">Valider</button></div></div>';
-    var vidEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier la vidéo</h3><div class="edit-popup__content">Source: <br><input type="text" class="src" placeholder="Lien vers l\'image" value=""><br>Description: <br><input type="text" class="alt" placeholder="Description de l\'image" value=""><br>Lien vers la vidéo: <br><input type="text" class="vidUrl" placeholder="Lien vers la vidéo" value=""><br><button class="the-button btn-primary">Valider</button></div></div>';
-    var txtEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier le texte</h3><div class="edit-popup__content"><button type="button" class="btn btn-default btn-sm style-bold"><span class="glyphicon glyphicon-bold" aria-hidden="true"></span> Bold </button><button type="button" class="btn btn-default btn-sm style-italic"><span class="glyphicon glyphicon-italic" aria-hidden="true"></span> Italic </button><div class="txt" contenteditable></div><button class="the-button-two the-text-btn btn-primary">Valider</button></div></div>';
+    var imgEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier l\'image</h3><div class="edit-popup__content">Source:<input type="text" class="src" placeholder="Lien vers l\'image" value="">Description:<input type="text" class="alt" placeholder="Description de l\'image" value=""><button class="validate-btn btn-primary">Valider</button></div></div>';
+    var vidEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier la vidéo</h3><div class="edit-popup__content">Source:<input type="text" class="src" placeholder="Lien vers l\'image" value="">Description:<input type="text" class="alt" placeholder="Description de l\'image" value="">Lien vers la vidéo:<input type="text" class="vidUrl" placeholder="Lien vers la vidéo" value=""><br><button class="validate-btn btn-primary">Valider</button></div></div>';
+    var txtEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier le texte</h3><div class="edit-popup__content"><button type="button" class="btn btn-default btn-sm style-bold"><span class="glyphicon glyphicon-bold" aria-hidden="true"></span> Bold </button><button type="button" class="btn btn-default btn-sm style-italic"><span class="glyphicon glyphicon-italic" aria-hidden="true"></span> Italic </button><div class="edited-txt" contenteditable></div><button class="validate-btn the-text-btn btn-primary">Valider</button></div></div>';
 
     // function to update index on sortable
     function updateIndex() {
@@ -168,9 +168,9 @@ $(document).ready(function() {
             $(this).addClass('current-editing');
             var text = $(this).html();
             var popup = $(this).closest('td');
-            var content = $(popup).find('.txt');
+            var content = $(popup).find('.edited-txt');
             $(content).html(text);
-            $('.txt').focus();
+            $('.edited-txt').focus();
         })
 
         .on('click','.style-bold', function() {
@@ -184,7 +184,7 @@ $(document).ready(function() {
         // txt update button
         .on('click', '.edit-popup .the-text-btn', function() {
             var content = $(this).closest('td').find('.current-editing');
-            var txt = $(this).parent().find('.txt');
+            var txt = $(this).parent().find('.edited-txt');
 
             if(txt!==''){
                 $(content).html($(txt).html());
@@ -193,7 +193,7 @@ $(document).ready(function() {
         })
 
         // custom edition popup validate button
-        .on('click', '.edit-popup .the-button', function() {
+        .on('click', '.edit-popup .validate-btn', function() {
             var img = $(this).closest('td').find("img");
             var anchor = img.parent();
 

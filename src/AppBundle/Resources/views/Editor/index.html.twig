@@ -30,30 +30,30 @@
     <!-- GLOBAL CONTAINER FOR EDITOR PAGE -->
     <div class="container editor">
         <div class="row">
+
             <!-- PREVIEW CONTAINER -->
-            <div class="col-md-9 left-content" role="main">
-                <div class="row left-content__head">
-                    <div class="col-xs-6 text-left">
-                        <h4>Prévisualisation</h4>
-                    </div>
-                    <div class="col-xs-6 text-right">
-                        <a href="#" id="downloadLink" data-blocks="{{ path('api_bloc') }}">
-                            <button type="button" class="btn btn-primary">
+            <div class="col-md-9" role="main">
+                <div class="left-content">
+                    <div class="row left-content__head">
+                        <div class="col-xs-6 text-left">
+                            <h4>Prévisualisation</h4>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <button type="button" class="btn btn-primary" id="downloadLink" data-blocks="{{ path('api_bloc') }}">
                                 <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Télécharger
                             </button>
-                        </a>
-                    </div>
-                </div>
-                <div class="preview-zone col-xs-12">
-                    <div class="row">
-                        <div class="col-xs-6 col-xs-offset-3 preview-title">
-                            <div class="input-group">
-                                <span class="input-group-addon" id="basic-addon1">Titre</span>
-                                <input id="title" type="text" class="form-control" placeholder="Veuillez inscrire votre titre…"
-                                       aria-describedby="basic-addon1">
-                            </div>
                         </div>
                     </div>
+                    <div class="preview-zone">
+                        <div class="row">
+                            <div class="col-xs-6 col-xs-offset-3">
+                                <div class="input-group preview-title">
+                                    <span class="input-group-addon" id="basic-addon1">Titre</span>
+                                    <input id="title" type="text" class="form-control" placeholder="Veuillez inscrire votre titre…"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                        </div>
                         <table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #ffffff !important; font-family: Arial, Helvetica, Geneva, sans-serif;">
                             <tbody>
                             <tr>
@@ -61,42 +61,46 @@
                                     <ul class="sortable preview-zone__sortable" id="content-to-download"></ul>
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
             <!-- NEWSLETTER BLOCKS CONTAINER -->
-            <div class="col-md-3 block-content" role="navigation">
-                <div class="row block-content__head">
-                    <div class="col-xs-12">
-                        <h4>Modèles de blocs</h4>
+            <div class="col-md-3" role="navigation">
+                <div class="block-content">
+                    <div class="row">
+                        <div class="block-content__head">
+                            <h4>Modèles de blocs</h4>
+                        </div>
                     </div>
-                </div>
-                <div class="blocks-list">
-                    {% for t in arrayTemplates %}
-                        {% if t.blocs[0].editor == true %}
-                            {% if t.blocs|length != 1 %}
-                                <div class="dropdown">
-                                    <button class="btn btn-primary dropdown-toggle block-btn" id="{{ t.template.title }}" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+
+                    <div class="blocks-list">
+                        {% for t in arrayTemplates %}
+                            {% if t.blocs[0].editor == true %}
+                                {% if t.blocs|length != 1 %}
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle block-btn" id="{{ t.template.title }}" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            {{ t.template.title }}
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu block-dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            {% for bloc in t.blocs %}
+                                                <li>
+                                                    <button type="button" class="btn btn-info block-btn block-draggable" data-html="<li data-order='' class='block-wrapper'>{{ bloc.content }}</li>">{{ bloc.title }}</button>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% else %}
+                                    <button type="button" class="btn btn-primary block-btn block-draggable" data-html="<li data-order='' class='block-wrapper'>{{ t.blocs[0].content}}</li>">
                                         {{ t.template.title }}
-                                        <span class="caret"></span>
                                     </button>
-                                    <ul class="dropdown-menu block-dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        {% for bloc in t.blocs %}
-                                            <li>
-                                                <button type="button" class="btn btn-info block-btn block-draggable" data-html="<li data-order='' class='block-wrapper'>{{ bloc.content }}</li>">{{ bloc.title }}</button>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            {% else %}
-                                <button type="button" class="btn btn-primary block-btn block-draggable" data-html="<li data-order='' class='block-wrapper'>{{ t.blocs[0].content}}</li>">
-                                    {{ t.template.title }}
-                                </button>
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
