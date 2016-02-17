@@ -8,14 +8,13 @@
 {% endblock %}
 
 {% block nav %}
-    {% for key, brand in brands %}
-        {% set active = (key == 0) ? 'active' : '' %}
-        <ul class="nav navbar-nav" role="tablist">
-            <li class="{{ active }}">
-                <a href="#">{{ brand.name }}<span class="sr-only">(current)</span></a>
+    <ul class="nav navbar-nav" role="tablist">
+        {% for key, brand in brands %}
+            <li>
+                <a href="{{ path('show_template', { 'slug_brand': brand.slug }) }}">{{ brand.name }}</a>
             </li>
-        </ul>
-    {% endfor %}
+        {% endfor %}
+    </ul>
 {% endblock %}
 
 {% block body %}

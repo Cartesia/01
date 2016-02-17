@@ -4,33 +4,61 @@
 {% block javascripts %}
     {{ parent() }}
 
-<script>
-    function hideTd(table, find)
-    {
-        var trs = table.find('tr');
-        var th = table.find('th'+find).hide();
+    <script>
 
-
-        $.each(trs, function(index, val) {
-            $(this).find('td'+find).hide();
-        });
-    }
-
-    $(document).ready(function(){
-
-        hideTd($('.table'), ':nth-child(4)');
-
-    });
-
-
-    $(document).on({
-
-        ajaxStop: function()
+        // Cache le td + th définie
+        function hideTd(table, find)
         {
-            hideTd($('.table'), ':nth-child(4)');
+            var trs = table.find('tr');
+            var th = table.find('th'+find).hide();
 
+
+            $.each(trs, function(index, val) {
+                $(this).find('td'+find).hide();
+            });
         }
-    });
+
+        // Ajoute une width td + th définie
+        function widthTd(table, find)
+        {
+            var trs = table.find('tr');
+
+            $.each(trs, function(index, val){
+                $(this).find('td'+find).css("width", "200px");
+            });
+        }
+
+        // Ajoute une height au textarea
+        function heighthTd(table, find)
+        {
+            var trs = table.find('tr');
+
+            $.each(trs, function(index, val){
+                $(this).find('textarea').css("height", "500px");
+            });
+        }
+
+        $(document).ready(function(){
+
+            hideTd($('.table'), ':nth-child(4)');
+            widthTd($('.table'), ':nth-child(1)');
+            widthTd($('.table'), ':nth-child(3)');
+            widthTd($('.table'), ':nth-child(5)');
+            heighthTd($('.table'), ':nth-child(2)');
+
+        });
+
+        $(document).on({
+
+            ajaxStop: function()
+            {
+                hideTd($('.table'), ':nth-child(4)');
+                widthTd($('.table'), ':nth-child(1)');
+                widthTd($('.table'), ':nth-child(3)');
+                widthTd($('.table'), ':nth-child(5)');
+                heighthTd($('.table'), ':nth-child(2)');
+            }
+        });
 
     </script>
 {% endblock %}

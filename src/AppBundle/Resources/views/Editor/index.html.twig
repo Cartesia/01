@@ -7,7 +7,7 @@
         {% for key, brand in brands %}
             {% set active = (key == 0) ? 'active' : '' %}
             <li class="{{ active }}">
-                <a href="#">{{ brand.name }}<span class="sr-only">(current)</span></a>
+                <a href="{{ path('editor_template', { 'slug_brand': brand.slug }) }}">{{ brand.name }}<span class="sr-only">(current)</span></a>
             </li>
         {% endfor %}
     </ul>
