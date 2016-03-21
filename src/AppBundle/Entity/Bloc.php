@@ -41,7 +41,7 @@ class Bloc
     private $editable;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Template", inversedBy="blocs")
+     * @ORM\ManyToOne(targetEntity="Template", inversedBy="blocs", cascade={"persist"})
      * @ORM\JoinColumn(name="template_id", nullable=false)
      */
     private $template;

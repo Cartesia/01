@@ -3,13 +3,17 @@ $(document).ready(function() {
     // Custom VAR for DOM appends
     //remove button on popup edits
     var rmvBtn = "<button class='remove-button'>x</button>";
+
     //buttons appended on img(s) and video(s) to trigger edit-popup(s)
     var imgEditBtn = "<button class='edit-img__button'>Editer image</button>";
     var vidEditBtn = "<button class='edit-vid__button'>Editer video</button>";
+    var btnEditBtn = "<button class='edit-btn__button'>Editer boutton</button>";
+
     //custom edit-popup(s) for img(s)/video(s) and editable text(s)
     var imgEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier l\'image</h3><div class="edit-popup__content">Source:<input type="text" class="src" placeholder="Lien vers l\'image" value="">Description:<input type="text" class="alt" placeholder="Description de l\'image" value=""><button class="validate-btn btn-primary">Valider</button></div></div>';
     var vidEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier la vidéo</h3><div class="edit-popup__content">Source:<input type="text" class="src" placeholder="Lien vers l\'image" value="">Description:<input type="text" class="alt" placeholder="Description de l\'image" value="">Lien vers la vidéo:<input type="text" class="vidUrl" placeholder="Lien vers la vidéo" value=""><br><button class="validate-btn btn-primary">Valider</button></div></div>';
     var txtEditPopup = '<div class="edit-popup"><h3 class="edit-popup__title">Modifier le texte</h3><div class="edit-popup__content"><button type="button" class="btn btn-default btn-sm style-bold"><span class="glyphicon glyphicon-bold" aria-hidden="true"></span> Bold </button><button type="button" class="btn btn-default btn-sm style-italic"><span class="glyphicon glyphicon-italic" aria-hidden="true"></span> Italic </button><div class="edited-txt" contenteditable></div><button class="validate-btn the-text-btn btn-primary">Valider</button></div></div>';
+    var btnEditPopup = '<div class="btn-edit-popup"><h3 class="edit-popup__title">Modifier le bouton</h3><div class="edit-popup__content">Lien:<input type="text" class="href" placeholder="Lien de redirection" value="">Texte:<input type="text" class="text" placeholder="Texte du bouton" value=""><button class="validate-btn btn-primary btn-update">Valider</button></div></div>';
 
     // function called on block 'drop' (cf: droppable)
     function editablePrompt() {
@@ -97,7 +101,7 @@ $(document).ready(function() {
 
     // enable 'Drag' of block elements
     $(".block-draggable").draggable({
-        cancel : '.edit-popup',
+        cancel : '.edit-popup,btn-edit-popup',
         helper :'clone',
         distance : 100
     });
@@ -112,12 +116,26 @@ $(document).ready(function() {
             var n = $('.preview-zone__sortable li').size();
             $(this).find("li").last().attr('data-order',n)
                 .prepend(rmvBtn);
-            var hasMedia = $(this).find("img").last();
+            var hasMedia = $(this).find("img.editable").last();
+
+            // détection bouton
+            var hasApBtn = $(this).find('editable-btn').last();
+
             if(hasMedia.hasClass('editable-src')){
-                $(this).find("img").last().parent().before(imgEditBtn);
+                $(this).find("img.editable").last().parent().before(imgEditBtn);
+                console.log('Regular image is now editable...');
+            }
+            if(hasMedia.hasClass('editable-ce-src')){
+                $(this).find('img.editable-ce-src').last().before(imgEditBtn);
+                console.log('Cartesia Education image is now editable...')
             }
             if(hasMedia.hasClass('editable-vid')){
                 $(this).find('img').last().parent().before(vidEditBtn);
+                console.log('Has media...type:video');
+            }
+            if(hasApBtn) {
+                console.log('btn detected');
+                $(this).find('.editable-btn').last().parent().before(btnEditBtn);
             }
         }
     });
@@ -133,7 +151,7 @@ $(document).ready(function() {
     // endable sortable, update index on reorder
     $( ".sortable" ).sortable({
         stop: updateIndex, // launch update index each time an el is sorted to re-number them
-        cancel: '.edit-popup,button,.popover', // prevent 'sortable' from working on these el
+        cancel: '.edit-popup,.btn-edit-popup,button,.popover', // prevent 'sortable' from working on these el
         distance: 100 //minimum distance (in px) before 'sortable' starts working
     })
         // indexation des blocs
@@ -141,6 +159,20 @@ $(document).ready(function() {
             $(this).parent().remove();
             updateIndex();
         })
+
+        // add custom btn-edit popup
+        .on('click', '.edit-btn__button', function() {
+            $(this).parent().prepend(btnEditPopup);
+            var url = $(this).closest('td').find('a').attr('href');
+            var txt = $(this).closest('td').find('span').text();
+            var editor = $(this).parent();
+            var link = editor.find('.href');
+            var text = editor.find('.text');
+            link.val(url);
+            text.val(txt);
+            link.focus();
+        })
+
         // add custom img-edit popup
         .on('click', ".edit-img__button", function() {
             $(this).parent().prepend(imgEditPopup);
@@ -149,7 +181,6 @@ $(document).ready(function() {
             var alt = $(this).parent().find('.alt');
             src.attr('value', img.attr('src'));
             alt.attr('value', img.attr('alt'));
-            alert('lol');
         })
 
         // add custom vid-edit popup
@@ -195,6 +226,25 @@ $(document).ready(function() {
                 $(content).html($(txt).html());
             }
             $(this).closest('.edit-popup').remove();
+        })
+
+        // btn update button
+        .on('click', '.btn-edit-popup .btn-update', function() {
+            var editorUrl = $(this).parent().find('.href').val();
+            var editorTxt = $(this).parent().find('.text').val();
+
+            var targetUrl = $(this).closest('td').find('.editable-btn').parent();
+            var targetTxt = $(this).closest('td').find('.editable-btn');
+
+            if(editorUrl!=='') {
+                targetUrl.attr('href',editorUrl);
+            }
+            if(editorTxt!=='') {
+                targetTxt.text(editorTxt);
+            }
+            $(this).closest('.btn-edit-popup').remove();
+            console.log('this shit should close');
+
         })
 
         // custom edition popup validate button
